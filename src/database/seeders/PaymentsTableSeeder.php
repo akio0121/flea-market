@@ -15,7 +15,7 @@ class PaymentsTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'name' => 'コンビニ払い'
+            'name' => 'コンビニ支払い'
         ];
         DB::table('payments')->insert($param);
 

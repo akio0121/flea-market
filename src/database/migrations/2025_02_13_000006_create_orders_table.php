@@ -16,6 +16,12 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('payment_id');
+            $table->foreignId('product_id');
+            $table->string('recipient_name')->nullable();
+            $table->text('recipient_post')->nullable();
+            $table->text('recipient_address')->nullable();
+            $table->text('recipient_building')->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
 

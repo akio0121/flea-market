@@ -28,8 +28,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->save();
-        dd($user);
-        //Auth::login($user);
+        Auth::login($user);
         
     }
 
