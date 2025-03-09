@@ -61,7 +61,7 @@ class ProductsTableSeeder extends Seeder
         $param = [
             'name' => 'ノートPC',
             'price' => 45000,
-            'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg',
+            'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg',
             'condition_id' => 1,
             'description' => '高性能なノートパソコン',
             'purchase_flg' => false,
@@ -123,6 +123,5 @@ class ProductsTableSeeder extends Seeder
             'user_id' => 2
         ];
         DB::table('products')->insert($param);
-
     }
 }
