@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MypageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,14 @@ Route::get('/login', [UserController::class, 'login']);
 //会員登録画面を表示する
 Route::get('/register', [UserController::class, 'register']);
 
-
-//会員登録画面でユーザー名等を入力後、プロフィール設定画面に遷移する
+//会員登録画面でユーザー名等を入力する
 Route::post('/register', [UserController::class, 'create']);
+
+//プロフィール設定画面を表示する
+Route::get('/mypage/profile', [MypageController::class, 'edit']);
+
+//プロフィール設定画面で郵便番号等を入力する
+Route::post('/mypage/profile', [MypageController::class, 'setting']);
 
 //商品一覧画面を表示する
 Route::get('/', [ItemController::class, 'index']);

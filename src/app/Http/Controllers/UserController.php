@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,7 +30,6 @@ class UserController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
         Auth::login($user);
-        
+        return redirect('/mypage/profile');
     }
-
 }
