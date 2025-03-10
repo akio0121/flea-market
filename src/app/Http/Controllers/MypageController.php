@@ -21,6 +21,6 @@ class MypageController extends Controller
         $user->address = $request->input('address');
         $user->building = $request->input('building');
         $user->save();
-        //return redirect('/');
+        return redirect('/');
     }
 }

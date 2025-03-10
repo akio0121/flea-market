@@ -1,0 +1,25 @@
+.image {
+    display: inline-block;
+    /* インライン要素として扱う */
+}
+
+.product-image {
+    width: 200px;
+    /* 幅を小さく調整 */
+    height: 200px;
+    /* 高さを指定して統一 */
+    object-fit: cover;
+    /* 画像を枠内で適切にトリミング */
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3列に分割 */
+    gap: 10px;
+    /* 画像間のスペース */
+    max-width: 900px;
+    /* 最大幅（調整可） */
+    margin: 0 auto;
+    /* 中央揃え */
+}

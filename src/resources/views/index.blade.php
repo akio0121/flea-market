@@ -6,13 +6,17 @@
 
 @section('content')
 <ul>
-    @foreach($products as $product)
-    <li>
-        <a href="/item/{{$product->id}}">
-            <img src="{{$product->image}}" alt="">
-        </a>
-        <p>{{$product->name}}</p>
-    </li>
-    @endforeach
+    <button>おすすめ</button>
+    <button>マイリスト</button>
+    <div class="image-grid">
+        @foreach($products as $product)
+        <li>
+            <a class="image" href="/item/{{$product->id}}">
+                <img class="product-image" src="{{$product->image}}" alt="">
+            </a>
+            <p class="name">{{$product->name}}</p>
+        </li>
+        @endforeach
+    </div>
 </ul>
 @endsection
