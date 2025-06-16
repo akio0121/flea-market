@@ -23,4 +23,22 @@ class MypageController extends Controller
         $user->save();
         return redirect('/');
     }
+
+    public function preview(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'image|max:2048',
+            ]);
+
+            // 一時保存（例: public/storage/temp_profile）
+            $path = $request->file('image')->store('temp_profile', 'public');
+
+            // 画像URLをセッションに保存
+            $url = asset('storage/' . $path);
+            session(['preview_image' => $url]);
+        }
+
+        return redirect()->back();
+    }
 }

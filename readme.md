@@ -15,6 +15,7 @@ Laravel環境構築
 4,php artisan key:generate
 5,php artisan migrate
 6,php artisan db:seed
+7,php artisan storage:link
 
 ・使用技術（実行環境）
 PHP 8.3.12

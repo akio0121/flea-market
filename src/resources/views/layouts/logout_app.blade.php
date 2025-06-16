@@ -18,6 +18,19 @@
         <a class="header__logo" href="/">
           COACHTECH
         </a>
+        <nav>
+          <ul class="header-nav">
+            <li class="header-nav__item">
+              <form class="form" action="/login" method="post">
+                @csrf
+                <button class="header-nav__button">ログイン</button>
+              </form>
+            </li>
+            <li class="header-nav__item">
+              <a class="header-nav__link" href="/mypage">マイページ</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </header>

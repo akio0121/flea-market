@@ -5,10 +5,31 @@
 @endsection
 
 @section('content')
+
 <div class="register__content">
     <div class="register-form__heading">
         <h2>プロフィール設定</h2>
     </div>
+
+    <form action="{{ route('profile.preview') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        <div class="profile-container">
+            {{-- プロフィール画像 --}}
+            <img
+                src="{{ session('preview_image') ?? asset('images/default_profile.png') }}"
+                alt="プロフィール画像"
+                width="150" height="150"
+                style="border-radius: 50%; object-fit: cover;">
+
+            {{-- 画像選択ボタン（ラベルで囲ってデフォルト表示を非表示に） --}}
+            <label>
+                画像を選択
+                <input type="file" name="image" accept="image/*" required onchange="this.form.submit()" style="display:none">
+            </label>
+        </div>
+    </form>
+
     <form class="form" action="/mypage/profile" method="post">
         @csrf
         <div class="form__group">

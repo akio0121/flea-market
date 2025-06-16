@@ -20,6 +20,9 @@ use App\Http\Controllers\MypageController;
 //ログイン画面を表示する
 Route::get('/login', [UserController::class, 'login']);
 
+//ログイン画面でログインする
+Route::post('/login', [UserController::class, 'startLogin']);
+
 //会員登録画面を表示する
 Route::get('/register', [UserController::class, 'register']);
 
@@ -32,8 +35,12 @@ Route::get('/mypage/profile', [MypageController::class, 'edit']);
 //プロフィール設定画面で郵便番号等を入力する
 Route::post('/mypage/profile', [MypageController::class, 'setting']);
 
+//プロフィール設定画面で画像を変更する
+Route::post('/profile/preview', [MypageController::class, 'preview'])->name('profile.preview');
+
 //商品一覧画面を表示する
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('product.index');
 
 //商品詳細画面を表示する
 Route::get('/item/{product}', [ProductController::class, 'detail']);
+

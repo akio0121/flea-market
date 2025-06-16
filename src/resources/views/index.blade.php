@@ -1,4 +1,5 @@
-@extends('layouts.app')
+{{-- headerファイルを読み込む --}}
+@extends($header)
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
