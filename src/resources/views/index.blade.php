@@ -7,8 +7,14 @@
 
 @section('content')
 <ul>
-    <button>おすすめ</button>
-    <button>マイリスト</button>
+    <a href="{{ url('/') }}">
+        <button>おすすめ</button>
+    </a>
+    @auth
+    <a href="{{ url('/') }}?tab=mylist">
+        <button>マイリスト</button>
+    </a>
+    @endauth
     <div class="image-grid">
         @foreach($products as $product)
         <li>

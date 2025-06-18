@@ -27,6 +27,11 @@
                 画像を選択
                 <input type="file" name="image" accept="image/*" required onchange="this.form.submit()" style="display:none">
             </label>
+            <div class="form__error">
+                @error('image')
+                {{ $message }}
+                @enderror
+            </div>
         </div>
     </form>
 
@@ -71,7 +76,7 @@
                     <input type="text" name="address" />
                 </div>
                 <div class="form__error">
-                    @error('password')
+                    @error('address')
                     {{ $message }}
                     @enderror
                 </div>
@@ -84,6 +89,11 @@
             <div class="form__group-content">
                 <div class="form__input--text">
                     <input type="text" name="building" />
+                </div>
+                <div class="form__error">
+                    @error('building')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
         </div>

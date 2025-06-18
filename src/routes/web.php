@@ -18,7 +18,7 @@ use App\Http\Controllers\MypageController;
 */
 
 //ログイン画面を表示する
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
 
 //ログイン画面でログインする
 Route::post('/login', [UserController::class, 'startLogin']);
@@ -44,3 +44,7 @@ Route::get('/', [ItemController::class, 'index'])->name('product.index');
 //商品詳細画面を表示する
 Route::get('/item/{product}', [ProductController::class, 'detail']);
 
+//商品出品画面を表示する
+Route::get('/sell', [ProductController::class, 'exhibit'])
+    ->name('sell')
+    ->middleware('auth');

@@ -20,15 +20,22 @@
         </a>
         <nav>
           <ul class="header-nav">
-            <li class="header-nav__item">
-              <form class="form" action="/login" method="post">
-                @csrf
-                <button class="header-nav__button">ログイン</button>
-              </form>
-            </li>
-            <li class="header-nav__item">
-              <a class="header-nav__link" href="/mypage">マイページ</a>
-            </li>
+            < class="header-nav__item">
+
+              <li class="header-nav__item">
+                <form method="GET" action="{{ route('product.index') }}">
+                  <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？">
+                </form>
+              </li>
+              <li class="header-nav__item">
+                <a href="/login">ログイン</a>
+              </li>
+              <li class="header-nav__item">
+                <a class="header-nav__link" href="/register">会員登録</a>
+              </li>
+              <li class="header-nav__item">
+                <a class="header-nav__link" href="/sell">出品</a>
+              </li>
           </ul>
         </nav>
       </div>
