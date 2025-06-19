@@ -26,6 +26,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class);
     }
+
+    public function goods()
+    {
+        return $this->hasMany(Good::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
 
 

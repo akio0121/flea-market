@@ -10,7 +10,13 @@ class ProductController extends Controller
     //商品詳細画面を表示する
     public function detail($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with([
+            'productCategories.category',
+            'comments.user'
+        ])
+            ->withCount(['goods', 'comments'])
+            ->findOrFail($id);
+
         return view('product.detail', compact('product'));
     }
 
