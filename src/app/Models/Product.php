@@ -35,4 +35,14 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'goods', 'product_id', 'user_id')->withTimestamps();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

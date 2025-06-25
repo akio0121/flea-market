@@ -15,6 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     protected $hidden = [
@@ -35,6 +36,16 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'goods', 'user_id', 'product_id')->withTimestamps();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
 

@@ -44,7 +44,19 @@ Route::get('/', [ItemController::class, 'index'])->name('product.index');
 //商品詳細画面を表示する
 Route::get('/item/{product}', [ProductController::class, 'detail']);
 
-//商品出品画面を表示する
-Route::get('/sell', [ProductController::class, 'exhibit'])
-    ->name('sell')
-    ->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+
+    // 商品出品画面を表示
+    Route::get('/sell', [ProductController::class, 'exhibit'])->name('sell');
+
+    // 商品詳細画面でコメントを入力
+    Route::post('/item/{product}', [ProductController::class, 'store'])->name('comment.store');
+
+    //商品詳細画面で「いいね」する
+    Route::post('/item/{product}/like', [ProductController::class, 'toggleLike'])->name('product.toggleLike');
+
+    //プロフィール画面を表示する
+    Route::get('/mypage',[MypageController::class,'showProfile']);
+
+});

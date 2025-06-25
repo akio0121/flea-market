@@ -17,6 +17,7 @@ class ProductsTableSeeder extends Seeder
         $param = [
             'name' => '腕時計',
             'price' => 15000,
+            'brand' => 'ロレックス',
             'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg',
             'condition_id' => 1,
             'description' => 'スタイリッシュなデザインのメンズ腕時計',
@@ -72,6 +73,7 @@ class ProductsTableSeeder extends Seeder
         $param = [
             'name' => 'マイク',
             'price' => 8000,
+            'brand' => 'bose',
             'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg',
             'condition_id' => 2,
             'description' => '高音質のレコーディング用マイク',

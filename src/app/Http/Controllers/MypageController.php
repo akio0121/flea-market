@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ProfileRequest;
+
 
 class MypageController extends Controller
 {
@@ -34,15 +39,36 @@ class MypageController extends Controller
             $request->validate([
                 'image' => 'image|max:2048',
             ]);
+            
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $filename = 'user_' . $user->id . '.' . $request->file('image')->extension();
 
-            // 一時保存（例: public/storage/temp_profile）
-            $path = $request->file('image')->store('temp_profile', 'public');
+            $path = $request->file('image')->storeAs('profile_images', $filename, 'public');
 
-            // 画像URLをセッションに保存
-            $url = asset('storage/' . $path);
-            session(['preview_image' => $url]);
+            // DBに画像パスを保存
+            $user->image = $path;
+            $user->save();
         }
 
         return redirect()->back();
+    }
+
+    //プロフィール画面で「出品した商品」、「購入した商品」を切り替えて表示する
+    public function showProfile()
+    {
+        $user = Auth::user();
+        $tab = request('tab'); // ?tab=sell or ?tab=buy
+
+        if ($tab === 'buy') {
+            // 購入した商品を取得（orders 経由）
+            $orders = $user->orders()->with('product')->get();
+            $products = $orders->pluck('product'); // 購入した products を抽出
+        } else {
+            // 出品した商品（products テーブル）
+            $products = Product::where('user_id', $user->id)->get();
+        }
+
+        return view('mypage.profile', compact('user', 'products', 'tab'));
     }
 }

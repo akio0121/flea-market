@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('user_id');
             $table->string('name');
             $table->integer('price');
+            $table->string('brand')->nullable();
             $table->string('image');
             $table->foreignId('condition_id');
             $table->text('description');

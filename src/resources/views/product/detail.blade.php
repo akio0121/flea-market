@@ -1,4 +1,5 @@
-@extends('layouts.app')
+{{-- headerファイルを読み込む --}}
+@extends($header)
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
@@ -11,11 +12,28 @@
 <a class="image" href="/item/{{$product->id}}">
     <img class="product-image" src="{{$product->image}}" alt="">
 </a>
-<h5>ブランド名</h5>
+<p>ブランド：{{ $product->brand }}</p>
 <p>¥{{ number_format($product->price) }}(税込)</p>
 
 <p>いいね：{{ $product->goods_count }}</p>
+@if(Auth::check())
+<form method="POST" action="{{ route('product.toggleLike', ['product' => $product->id]) }}">
+    @csrf
+    <button type="submit">いいね</button>
+</form>
+@else
+<a href="{{ route('login') }}">
+    <button type="button">いいね</button>
+</a>
+@endif
 <p>コメント：{{ $product->comments_count }}</p>
+<a href="#comment-form">
+    <button type="button">コメントする</button>
+</a>
+<form action="{{ url('/purchase/' . $product->id) }}" method="POST">
+    @csrf
+    <button type="submit">購入手続きへ</button>
+</form>
 <h3>商品説明</h3>
 <p>{{ $product->description }}</p>
 <h3>商品の情報</h3>
@@ -32,10 +50,20 @@
 <ul>
     @foreach ($product->comments as $comment)
     <li>
+        <img src="{{ asset($comment->user->image ?? 'images/default_profile.png') }}"
+            alt="ユーザー画像"
+            style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
         <strong>{{ $comment->user->name }}</strong>：
         <span>{{ $comment->name }}</span>
     </li>
     @endforeach
 </ul>
+<p>商品へのコメント</p>
+<form action="{{ route('comment.store', ['product' => $product->id]) }}" method="POST" id="comment-form">
+    @csrf
+    <textarea name="name" rows="5" cols="50" required></textarea>
+    <br>
+    <button type="submit">コメントを送信する</button>
+</form>
 
 @endsection

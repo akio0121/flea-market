@@ -15,12 +15,10 @@
         @csrf
 
         <div class="profile-container">
-            {{-- プロフィール画像 --}}
-            <img
-                src="{{ session('preview_image') ?? asset('images/default_profile.png') }}"
+            {{-- ユーザー画像（なければデフォルト画像） --}}
+            <img src="{{ asset($user->image ?? 'images/default_profile.png') }}"
                 alt="プロフィール画像"
-                width="150" height="150"
-                style="border-radius: 50%; object-fit: cover;">
+                style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
 
             {{-- 画像選択ボタン（ラベルで囲ってデフォルト表示を非表示に） --}}
             <label>
