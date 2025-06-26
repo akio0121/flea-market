@@ -36,10 +36,18 @@
     @foreach ($products as $product)
     <li>
         <a class="image" href="/item/{{$product->id}}">
-            <img class="product-image" src="{{$product->image}}" alt="">
+            <img class="product-image"
+                src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
+                alt="">
         </a>
         <p>{{ $product->name }}</p>
     </li>
+
+    {{-- SOLD ラベル（出品商品のときだけ表示） --}}
+    @if(isset($soldProductIds) && in_array($product->id, $soldProductIds))
+    <span class="sold-label">SOLD</span>
+    @endif
+
 </div>
 @endforeach
 </div>

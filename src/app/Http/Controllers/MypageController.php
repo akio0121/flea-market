@@ -54,7 +54,7 @@ class MypageController extends Controller
         return redirect()->back();
     }
 
-    //プロフィール画面で「出品した商品」、「購入した商品」を切り替えて表示する
+    //プロフィール画面で「出品した商品」、「購入した商品」を切り替えて表示する。購入した商品はsold表示する。
     public function showProfile()
     {
         $user = Auth::user();
@@ -64,11 +64,15 @@ class MypageController extends Controller
             // 購入した商品を取得（orders 経由）
             $orders = $user->orders()->with('product')->get();
             $products = $orders->pluck('product'); // 購入した products を抽出
+            $soldProductIds = []; // 購入商品には SOLD ラベルは不要
         } else {
-            // 出品した商品（products テーブル）
+            // 出品した商品
             $products = Product::where('user_id', $user->id)->get();
+
+            // 出品商品のうち、売れたもののIDを取得
+            $soldProductIds = Order::whereIn('product_id', $products->pluck('id'))->pluck('product_id')->toArray();
         }
 
-        return view('mypage.profile', compact('user', 'products', 'tab'));
+        return view('mypage.profile', compact('user', 'products', 'tab', 'soldProductIds'));
     }
 }

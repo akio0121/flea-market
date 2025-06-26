@@ -22,7 +22,6 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->foreignId('condition_id');
             $table->text('description');
-            $table->boolean('purchase_flg');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

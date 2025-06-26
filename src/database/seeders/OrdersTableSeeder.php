@@ -22,9 +22,23 @@ class OrdersTableSeeder extends Seeder
         DB::table('orders')->insert($param);
 
         $param = [
+            'user_id' => 1,
+            'payment_id' => 2,
+            'product_id' => 6
+        ];
+        DB::table('orders')->insert($param);
+
+        $param = [
             'user_id' => 2,
             'payment_id' => 2,
             'product_id' => 5
+        ];
+        DB::table('orders')->insert($param);
+
+        $param = [
+            'user_id' => 2,
+            'payment_id' => 1,
+            'product_id' => 1
         ];
         DB::table('orders')->insert($param);
     }

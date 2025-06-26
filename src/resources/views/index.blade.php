@@ -19,10 +19,17 @@
         @foreach($products as $product)
         <li>
             <a class="image" href="/item/{{$product->id}}">
-                <img class="product-image" src="{{$product->image}}" alt="">
+                <img class="product-image"
+                    src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
+                    alt="">
             </a>
             <p class="name">{{$product->name}}</p>
+            @if(in_array($product->id, $soldProductIds))
+            <span class="sold-label">SOLD</span>
+            @endif
         </li>
+
+
         @endforeach
     </div>
 </ul>

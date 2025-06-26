@@ -10,8 +10,14 @@
 
 <h1>{{ $product->name }}</h1>
 <a class="image" href="/item/{{$product->id}}">
-    <img class="product-image" src="{{$product->image}}" alt="">
+    <img class="product-image"
+        src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
+        alt="">
 </a>
+@if($isSold)
+<span class="sold-label">Sold</span>
+@endif
+
 <p>ブランド：{{ $product->brand }}</p>
 <p>¥{{ number_format($product->price) }}(税込)</p>
 
@@ -61,8 +67,11 @@
 <p>商品へのコメント</p>
 <form action="{{ route('comment.store', ['product' => $product->id]) }}" method="POST" id="comment-form">
     @csrf
-    <textarea name="name" rows="5" cols="50" required></textarea>
+    <textarea name="name" rows="5" cols="50"></textarea>
     <br>
+    @error('name')
+    {{ $message }}
+    @enderror
     <button type="submit">コメントを送信する</button>
 </form>
 

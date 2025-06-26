@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Good;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,9 @@ class ItemController extends Controller
 
         $products = $query->get();
 
-        return view('index', compact('products', 'header', 'keyword', 'tab'));
+        // 売れた商品ID一覧を取得（ordersテーブルにある product_id）
+        $soldProductIds = Order::pluck('product_id')->unique()->toArray();
+
+        return view('index', compact('products', 'header', 'keyword', 'tab', 'soldProductIds'));
     }
 }

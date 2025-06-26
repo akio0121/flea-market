@@ -47,9 +47,6 @@ Route::get('/item/{product}', [ProductController::class, 'detail']);
 
 Route::middleware('auth')->group(function () {
 
-    // 商品出品画面を表示
-    Route::get('/sell', [ProductController::class, 'exhibit'])->name('sell');
-
     // 商品詳細画面でコメントを入力
     Route::post('/item/{product}', [ProductController::class, 'store'])->name('comment.store');
 
@@ -57,6 +54,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{product}/like', [ProductController::class, 'toggleLike'])->name('product.toggleLike');
 
     //プロフィール画面を表示する
-    Route::get('/mypage',[MypageController::class,'showProfile']);
+    Route::get('/mypage', [MypageController::class, 'showProfile']);
 
+    // 商品出品画面を表示
+    Route::get('/sell', [ProductController::class, 'exhibit'])->name('sell');
+
+    // 出品処理（カテゴリ・商品情報まとめて送信）
+    Route::post('/sell', [ProductController::class, 'exhibitStore'])->name('products.store');
+
+    // 出品処理（画像アップロード用）
+    Route::post('/image-upload', [ProductController::class, 'uploadImage'])->name('image.upload');
+    
 });
