@@ -64,5 +64,16 @@ Route::middleware('auth')->group(function () {
 
     // 出品処理（画像アップロード用）
     Route::post('/image-upload', [ProductController::class, 'uploadImage'])->name('image.upload');
-    
+
+    //商品購入画面を表示する
+    Route::get('/purchase/{product}', [ProductController::class, 'showBuy'])->name('product.buy');
+
+    //商品購入画面で、購入処理を行う
+    Route::post('/purchase/{product}', [ProductController::class, 'purchase'])->name('product.purchase');
+
+    //送付先住所変更画面を表示する
+    Route::get('/purchase/address/{product}', [ProductController::class, 'editAddress'])->name('product.address.edit');
+
+    //送付先住所変更画面で、変更した住所をセッションに保存
+    Route::post('/purchase/address/{product}', [ProductController::class, 'storeAddress'])->name('product.address.store');
 });

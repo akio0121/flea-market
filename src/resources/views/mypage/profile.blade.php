@@ -7,8 +7,13 @@
 @section('content')
 
 <div class="profile">
+    @php
+    $imagePath = $user->image && file_exists(storage_path('app/public/' . $user->image))
+    ? asset('storage/' . $user->image)
+    : asset('images/default_profile.png');
+    @endphp
     {{-- ユーザー画像（なければデフォルト画像） --}}
-    <img src="{{ asset($user->image ?? 'images/default_profile.png') }}"
+    <img src="{{ asset($user->image ? 'storage/' . $user->image : 'images/default_profile.png') }}"
         alt="プロフィール画像"
         style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
     {{-- ユーザー名の表示 --}}

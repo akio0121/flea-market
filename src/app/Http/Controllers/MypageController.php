@@ -17,7 +17,8 @@ class MypageController extends Controller
     //プロフィール設定画面を表示する
     public function edit()
     {
-        return view('mypage.setting');
+        $user = auth()->user(); // ログインユーザー取得
+        return view('mypage.setting', compact('user'));
     }
 
     //プロフィール設定画面で郵便番号等を入力後、商品一覧画面に遷移する
@@ -39,7 +40,7 @@ class MypageController extends Controller
             $request->validate([
                 'image' => 'image|max:2048',
             ]);
-            
+
             /** @var \App\Models\User $user */
             $user = Auth::user();
             $filename = 'user_' . $user->id . '.' . $request->file('image')->extension();

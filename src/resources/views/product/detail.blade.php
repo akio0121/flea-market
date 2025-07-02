@@ -36,10 +36,9 @@
 <a href="#comment-form">
     <button type="button">コメントする</button>
 </a>
-<form action="{{ url('/purchase/' . $product->id) }}" method="POST">
-    @csrf
-    <button type="submit">購入手続きへ</button>
-</form>
+<a href="{{ url('/purchase/' . $product->id) }}" class="btn btn-primary">
+    購入手続きへ
+</a>
 <h3>商品説明</h3>
 <p>{{ $product->description }}</p>
 <h3>商品の情報</h3>

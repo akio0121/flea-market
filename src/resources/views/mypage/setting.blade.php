@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.login_app')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/setting.css') }}">
@@ -16,7 +16,14 @@
 
         <div class="profile-container">
             {{-- ユーザー画像（なければデフォルト画像） --}}
-            <img src="{{ asset($user->image ?? 'images/default_profile.png') }}"
+            @php
+            $storagePath = storage_path('app/public/' . ($user->image ?? ''));
+            $imagePath = ($user->image && file_exists($storagePath))
+            ? asset('storage/' . $user->image)
+            : asset('images/default_profile.png');
+            @endphp
+
+            <img src="{{ $imagePath }}"
                 alt="プロフィール画像"
                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
 
@@ -41,7 +48,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="name" value="{{ old('name') }}" />
+                    <input type="text" name="name" value="{{ old('name', auth()->user()->name) }}">
                 </div>
                 <div class="form__error">
                     @error('name')
@@ -56,7 +63,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="post" value="{{ old('post') }}" />
+                    <input type="text" name="post" value="{{ old('post', auth()->user()->post) }}">
                 </div>
                 <div class="form__error">
                     @error('post')
@@ -71,7 +78,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="address" />
+                    <input type="text" name="address" value="{{ old('address', auth()->user()->address) }}">
                 </div>
                 <div class="form__error">
                     @error('address')
@@ -86,7 +93,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="building" />
+                    <input type="text" name="building" value="{{ old('building', auth()->user()->building) }}">
                 </div>
                 <div class="form__error">
                     @error('building')

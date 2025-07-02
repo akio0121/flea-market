@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\ExhibitionRequest;
+use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\RecipientRequest;
 use App\Models\Product;
 use App\Models\Comment;
 use App\Models\Order;
 use App\Models\Category;
 use App\Models\Condition;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -97,5 +100,60 @@ class ProductController extends Controller
 
         // セッションに画像パスを保存してリダイレクト
         return back()->with('imagePath', $path);
+    }
+
+    //商品購入画面を表示する
+    public function showBuy(Request $request, Product $product)
+    {
+        $product->load('user'); // 出品者情報
+        $payments = Payment::all(); // 支払い方法一覧
+
+        //プルダウンで選択した支払い方法を画面内に表示
+        $selectedPayment = null;
+        if ($request->filled('payment_id')) {
+            $selectedPayment = Payment::find($request->payment_id);
+        }
+
+        return view('product.buy', compact('product', 'payments', 'selectedPayment'));
+    }
+
+    //商品を購入する
+    public function purchase(PurchaseRequest $request, Product $product)
+    {
+
+        // セッションから配送先情報を取得
+        $recipient_post = session('recipient_post');
+        $recipient_address = session('recipient_address');
+        $recipient_building = session('recipient_building');
+        
+        Order::create([
+            'user_id' => auth()->id(),
+            'product_id' => $product->id,
+            'payment_id' => $request->input('payment_id'),
+            'recipient_post' => $recipient_post,
+            'recipient_address' => $recipient_address,
+            'recipient_building' => $recipient_building,
+        ]);
+
+        return redirect('/');
+    }
+
+    //送付先住所変更画面を表示する
+    public function editAddress(Product $product)
+    {
+        return view('product.edit', compact('product'));
+    }
+
+    //送付先住所変更画面で、変更した住所をセッションに保存
+    public function storeAddress(RecipientRequest $request, Product $product)
+    {
+        // セッションに保存
+        session([
+            'recipient_post' => $request->input('recipient_post'),
+            'recipient_address' => $request->input('recipient_address'),
+            'recipient_building' => $request->input('recipient_building'),
+        ]);
+
+        return redirect()->route('product.buy', $product->id);
     }
 }

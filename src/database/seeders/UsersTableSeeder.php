@@ -21,8 +21,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('aaaaaaaa'),
             'post' => '123-4567',
             'address' => '広島県広島市',
-            'building' => 'ハイツ広島',
-            'image' => 'images/icon_business_man01.png'
+            'building' => 'ハイツ広島'
 
         ];
         DB::table('users')->insert($param);
@@ -33,8 +32,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('bbbbbbbb'),
             'post' => '234-5678',
             'address' => '山口県岩国市',
-            'building' => 'ハイツ岩国',
-            'image' => 'images/icon_business_woman01.png'
+            'building' => 'ハイツ岩国'
         ];
         DB::table('users')->insert($param);
     }
