@@ -17,6 +17,15 @@ Laravel環境構築
 6,php artisan db:seed
 7,php artisan storage:link
 
+・ユーザー名
+1,testA
+  aaa@bbb.com
+  aaaaaaaa
+
+2,testB
+  bbb@ccc.com
+  bbbbbbbb
+
 ・使用技術（実行環境）
 PHP 8.3.12
 MySQL 8.0.26
