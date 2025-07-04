@@ -27,11 +27,15 @@ class ProductController extends Controller
             ->withCount(['goods', 'comments'])
             ->findOrFail($id);
 
+        $user = Auth::user();
+        //「いいね済み」かどうかを判定
+        $hasLiked = $user ? $product->likedUsers()->where('user_id', $user->id)->exists() : false;
+
         $header = Auth::check() ? 'layouts.login_app' : 'layouts.logout_app';
         // 「購入済み」かどうかを判定
         $isSold = Order::where('product_id', $product->id)->exists();
 
-        return view('product.detail', compact('product', 'header', 'isSold'));
+        return view('product.detail', compact('product', 'header', 'isSold', 'hasLiked'));
     }
 
     //商品詳細画面でコメントを入力する
@@ -125,7 +129,7 @@ class ProductController extends Controller
         $recipient_post = session('recipient_post');
         $recipient_address = session('recipient_address');
         $recipient_building = session('recipient_building');
-        
+
         Order::create([
             'user_id' => auth()->id(),
             'product_id' => $product->id,

@@ -15,9 +15,9 @@
   <header class="header">
     <div class="header__inner">
       <div class="header-utilities">
-        <a class="header__logo" href="/">
-          COACHTECH
-        </a>
+        <a class="header__logo" href="/">COACHTECH</a>
+        <nav class="header__nav">
+        </nav>
       </div>
     </div>
   </header>

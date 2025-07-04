@@ -6,31 +6,34 @@
 @endsection
 
 @section('content')
-<ul>
-    <a href="{{ url('/') }}">
-        <button>おすすめ</button>
+<div class="tab-buttons">
+    <a href="{{ url('/') }}" class="tab-link {{ request('tab') !== 'mylist' ? 'active' : '' }}">
+        おすすめ
     </a>
     @auth
-    <a href="{{ url('/') }}?tab=mylist">
-        <button>マイリスト</button>
+    <a href="{{ url('/') }}?tab=mylist" class="tab-link {{ request('tab') === 'mylist' ? 'active' : '' }}">
+        マイリスト
     </a>
     @endauth
-    <div class="image-grid">
-        @foreach($products as $product)
-        <li>
-            <a class="image" href="/item/{{$product->id}}">
-                <img class="product-image"
-                    src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
-                    alt="">
-            </a>
-            <p class="name">{{$product->name}}</p>
-            @if(in_array($product->id, $soldProductIds))
-            <span class="sold-label">SOLD</span>
-            @endif
-        </li>
+</div>
+
+<hr class="tab-divider">
+
+<ul class="product-list">
+    @foreach($products as $product)
+    <li class="product-card">
+        <a class="image" href="/item/{{$product->id}}">
+            <img class="product-image"
+                src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
+                alt="">
+        </a>
+        <p class="name">{{$product->name}}</p>
+        @if(in_array($product->id, $soldProductIds))
+        <span class="sold-label">SOLD</span>
+        @endif
+    </li>
 
 
-        @endforeach
-    </div>
+    @endforeach
 </ul>
 @endsection

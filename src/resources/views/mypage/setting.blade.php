@@ -23,13 +23,11 @@
             : asset('images/default_profile.png');
             @endphp
 
-            <img src="{{ $imagePath }}"
-                alt="プロフィール画像"
-                style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+            <img src="{{ $imagePath }}" alt="プロフィール画像" class="profile-icon">
 
             {{-- 画像選択ボタン（ラベルで囲ってデフォルト表示を非表示に） --}}
-            <label>
-                画像を選択
+            <label class="image-upload-label">
+                画像を選択する
                 <input type="file" name="image" accept="image/*" required onchange="this.form.submit()" style="display:none">
             </label>
             <div class="form__error">
@@ -57,6 +55,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form__group">
             <div class="form__group-title">
                 <span class="form__label--item">郵便番号</span>
@@ -72,6 +71,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form__group">
             <div class="form__group-title">
                 <span class="form__label--item">住所</span>
@@ -87,6 +87,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form__group">
             <div class="form__group-title">
                 <span class="form__label--item">建物名</span>
@@ -102,6 +103,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form__button">
             <button class="form__button-submit" type="submit">更新する</button>
         </div>

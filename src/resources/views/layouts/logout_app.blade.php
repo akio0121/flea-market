@@ -15,27 +15,23 @@
   <header class="header">
     <div class="header__inner">
       <div class="header-utilities">
-        <a class="header__logo" href="/">
-          COACHTECH
-        </a>
-        <nav>
-          <ul class="header-nav">
-            < class="header-nav__item">
+        <a class="header__logo" href="/">COACHTECH</a>
 
-              <li class="header-nav__item">
-                <form method="GET" action="{{ route('product.index') }}">
-                  <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？">
-                </form>
-              </li>
-              <li class="header-nav__item">
-                <a href="/login">ログイン</a>
-              </li>
-              <li class="header-nav__item">
-                <a class="header-nav__link" href="/register">会員登録</a>
-              </li>
-              <li class="header-nav__item">
-                <a class="header-nav__link" href="/sell">出品</a>
-              </li>
+        <form method="GET" action="{{ route('product.index') }}" class="header-search">
+          <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？" class="search-input">
+        </form>
+
+        <nav class="header-nav">
+          <ul class="header-nav__list">
+            <li class="header-nav__item">
+              <a href="/login">ログイン</a>
+            </li>
+            <li class="header-nav__item">
+              <a class="header-nav__link" href="/register">会員登録</a>
+            </li>
+            <li class="header-nav__item">
+              <a class="header-nav__link sell-button" href="/sell">出品</a>
+            </li>
           </ul>
         </nav>
       </div>

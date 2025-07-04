@@ -1,0 +1,158 @@
+/* 全体：商品画像と商品情報を横並びに */
+.product-details-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* 画像とテキストの間のスペース */
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-top: 80px;
+}
+
+/* 商品画像 */
+.product-image img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.payment-select {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.payment-select label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 250px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/*横線*/
+.section-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 30px 0;
+    width: 60%;
+}
+
+.summary-price .label {
+    margin-right: 30px;
+}
+
+.payment-summary-box {
+    border: 1px solid #ccc;
+    padding: 16px;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.payment-summary-box p {
+    margin: 0;
+    margin-bottom: 6px;
+    font-size: 16px;
+}
+
+.summary-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.custom-purchase-button {
+    background-color: #e44141;
+    /* 赤色 */
+    color: #fff;
+    /* 白文字 */
+    border: none;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    .purchase-form {
+    text-align: right;
+    /* ボタン全体を右寄せ */
+    margin-top: 20px;   }
+}
+
+/* ========== PCサイズ (1400px〜1540px) ========== */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .product-details-container {
+        margin-left: 40px;
+        margin-right: 40px;
+        gap: 40px;
+    }
+
+    .product-image img {
+        width: 220px;
+    }
+
+    .form-control {
+        width: 300px;
+    }
+
+    .section-divider {
+        width: 50%;
+    }
+
+    .payment-summary-box {
+        width: 400px;
+    }
+
+    .custom-purchase-button {
+        padding: 12px 30px;
+        font-size: 18px;
+    }
+}
+
+/* ========== タブレットサイズ (768px〜850px) ========== */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .product-details-container {
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+        gap: 20px;
+    }
+
+    .product-image img {
+        width: 180px;
+    }
+
+    .payment-summary-box {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .form-control {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .section-divider {
+        width: 80%;
+    }
+
+    .purchase-form {
+        width: 100%;
+        text-align: center;
+    }
+
+    .custom-purchase-button {
+        width: 80%;
+        max-width: 300px;
+        display: inline-block;
+    }
+}

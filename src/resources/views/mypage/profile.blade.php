@@ -6,54 +6,61 @@
 
 @section('content')
 
-<div class="profile">
+<div class="profile-container">
     @php
     $imagePath = $user->image && file_exists(storage_path('app/public/' . $user->image))
     ? asset('storage/' . $user->image)
     : asset('images/default_profile.png');
     @endphp
+
     {{-- ユーザー画像（なければデフォルト画像） --}}
-    <img src="{{ asset($user->image ? 'storage/' . $user->image : 'images/default_profile.png') }}"
-        alt="プロフィール画像"
-        style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
-    {{-- ユーザー名の表示 --}}
-    <h2>{{ $user->name }}</h2>
+    <div class="profile-image">
+        <img src="{{ asset($user->image ? 'storage/' . $user->image : 'images/default_profile.png') }}" alt="プロフィール画像" class="profile-icon">
+    </div>
+
+    <div class="profile-info">
+        <h2 class="profile-name">{{ $user->name }}</h2>
+
+        <a href="{{ url('/mypage/profile') }}">
+            <button type="button" class="edit-profile-button">プロフィールを編集</button>
+        </a>
+    </div>
 </div>
-<a href="{{ url('/mypage/profile') }}">
-    <button type="button">プロフィールを編集</button>
-</a>
-<ul>
-    {{-- タブ切り替えボタン --}}
-    <li>
-        <a href="{{ url('/mypage?tab=sell') }}">
-            <button>出品した商品</button>
-        </a>
-    </li>
+
+@php
+$currentTab = request()->query('tab');
+@endphp
+
+<div class="tab-buttons">
+    <a href="{{ url('/mypage?tab=sell') }}" class="tab-link {{ $currentTab === 'sell' ? 'active' : '' }}">
+        出品した商品
+    </a>
+
     @auth
-    <li>
-        <a href="{{ url('/mypage?tab=buy') }}">
-            <button>購入した商品</button>
-        </a>
-    </li>
+    <a href="{{ url('/mypage?tab=buy') }}" class="tab-link {{ $currentTab === 'buy' ? 'active' : '' }}">
+        購入した商品
+    </a>
     @endauth
-</ul>
+</div>
+
+<hr class="tab-divider">
+
 <div class="product-list">
     @foreach ($products as $product)
-    <li>
+    <div class="product-card">
         <a class="image" href="/item/{{$product->id}}">
             <img class="product-image"
                 src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
                 alt="">
         </a>
-        <p>{{ $product->name }}</p>
-    </li>
+        <p class="product-name">{{ $product->name }}</p>
 
-    {{-- SOLD ラベル（出品商品のときだけ表示） --}}
-    @if(isset($soldProductIds) && in_array($product->id, $soldProductIds))
-    <span class="sold-label">SOLD</span>
-    @endif
+        {{-- SOLD ラベル（出品商品のときだけ表示） --}}
+        @if(isset($soldProductIds) && in_array($product->id, $soldProductIds))
+        <span class="sold-label">SOLD</span>
+        @endif
 
-</div>
-@endforeach
+    </div>
+    @endforeach
 </div>
 @endsection

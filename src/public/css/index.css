@@ -1,25 +1,89 @@
-.image {
-    display: inline-block;
-    /* インライン要素として扱う */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin: 30px 150px;
+    list-style: none;
+    padding: 0;
+}
+
+.product-card {
+    position: relative;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff;
 }
 
 .product-image {
-    width: 200px;
-    /* 幅を小さく調整 */
+    width: 100%;
     height: 200px;
-    /* 高さを指定して統一 */
     object-fit: cover;
-    /* 画像を枠内で適切にトリミング */
+    border-radius: 4px;
 }
 
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* 3列に分割 */
-    gap: 10px;
-    /* 画像間のスペース */
-    max-width: 900px;
-    /* 最大幅（調整可） */
-    margin: 0 auto;
-    /* 中央揃え */
+.product-name {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sold-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: red;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.tab-buttons{
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    margin-top: 30px;
+    padding-left: 200px;
+}
+
+.tab-link.active{
+    color: #e44141;
+}
+
+.tab-divider {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+/* PC 1400px〜1540px */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .tab-buttons {
+        padding-left: 100px;
+    }
+
+    .product-list {
+        margin: 30px 100px;
+    }
+}
+
+/* タブレット 768px〜850px */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .tab-buttons {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+        gap: 10px;
+    }
+
+    .product-list {
+        margin: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .tab-link {
+        font-size: 14px;
+    }
 }

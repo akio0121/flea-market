@@ -1,0 +1,82 @@
+/* フォームを中央に配置し、幅を制限 */
+.edit__content {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* フォームの見出しを中央寄せ */
+.edit-form__heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form__group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form__label--item {
+    font-weight: bold;
+}
+
+.form__input--text input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.form__button {
+    margin-top: 30px;
+}
+
+.form__button-submit {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #e44141;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* PC (1400px 〜 1540px) に対応 */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .edit__content {
+        max-width: 600px;
+    }
+
+    .form__input--text input {
+        font-size: 18px;
+    }
+
+    .form__button-submit {
+        font-size: 18px;
+    }
+}
+
+/* タブレット (768px 〜 850px) に対応 */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .edit__content {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .form__input--text input {
+        font-size: 16px;
+    }
+
+    .form__button-submit {
+        font-size: 16px;
+    }
+}

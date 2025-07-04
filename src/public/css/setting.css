@@ -1,0 +1,117 @@
+.register__content {
+    max-width: 600px;
+    margin: 0 auto;
+    /* 中央寄せ */
+    padding: 40px 20px;
+ 
+}
+
+/* フォームグループの余白調整 */
+.form__group {
+    margin-bottom: 20px;
+}
+
+/* 入力欄を100%幅にする */
+.form__input--text input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* 更新ボタンをフォーム幅に合わせる */
+.form__button-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #e44141;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form__label--item {
+    font-weight: bold;
+}
+
+.register-form__heading h2 {
+    text-align: center;
+}
+
+.profile-icon {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+.image-upload-label {
+    padding: 8px 16px;
+    background-color: #fff;
+    color: #e44141;
+    border: 1px solid #e44141;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 20px;
+}
+
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* タブレット（768px ～ 850px） */
+@media (min-width: 768px) and (max-width: 850px) {
+    .profile-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 0 24px;
+    }
+
+    .profile-info {
+        text-align: left;
+    }
+
+    .edit-profile-button {
+        margin-top: 0;
+        margin-left: 16px;
+    }
+
+    .tab-buttons {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 16px;
+        margin-left: 24px;
+    }
+}
+
+/* PC（1400px ～ 1540px） */
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .product-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .tab-buttons {
+        justify-content: flex-start;
+        margin-left: 40px;
+    }
+
+    .form {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .form__button-submit {
+        width: 100%;
+    }
+}
