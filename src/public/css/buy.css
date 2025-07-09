@@ -88,6 +88,12 @@
     margin-top: 20px;   }
 }
 
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}    
+
 /* ========== PCサイズ (1400px〜1540px) ========== */
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
     .product-details-container {

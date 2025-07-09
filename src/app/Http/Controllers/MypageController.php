@@ -59,21 +59,35 @@ class MypageController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
-        $tab = request('tab'); // ?tab=sell or ?tab=buy
+        $tab = request('tab');
+        $keyword = request('keyword'); // 検索キーワード取得
 
         if ($tab === 'buy') {
             // 購入した商品を取得（orders 経由）
-            $orders = $user->orders()->with('product')->get();
-            $products = $orders->pluck('product'); // 購入した products を抽出
-            $soldProductIds = []; // 購入商品には SOLD ラベルは不要
-        } else {
-            // 出品した商品
-            $products = Product::where('user_id', $user->id)->get();
+            $orders = $user->orders()->with(['product' => function ($query) use ($keyword) {
+                if ($keyword) {
+                    $query->where('name', 'like', "%{$keyword}%");
+                }
+            }])->get();
 
-            // 出品商品のうち、売れたもののIDを取得
-            $soldProductIds = Order::whereIn('product_id', $products->pluck('id'))->pluck('product_id')->toArray();
+            $products = $orders->pluck('product');
+            $soldProductIds = []; // 購入商品には SOLD ラベルは不要
+
+        } else {
+            // 出品した商品を検索キーワード付きで取得
+            $query = Product::where('user_id', $user->id);
+
+            if ($keyword) {
+                $query->where('name', 'like', "%{$keyword}%");
+            }
+
+            $products = $query->get();
+
+            // 売れたものの ID を取得
+            $soldProductIds = Order::whereIn('product_id', $products->pluck('id'))
+                ->pluck('product_id')->toArray();
         }
 
-        return view('mypage.profile', compact('user', 'products', 'tab', 'soldProductIds'));
+        return view('mypage.profile', compact('user', 'products', 'tab', 'soldProductIds', 'keyword'));
     }
 }

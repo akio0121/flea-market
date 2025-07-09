@@ -17,7 +17,8 @@
       <div class="header-utilities">
         <a class="header__logo" href="/">COACHTECH</a>
 
-        <form method="GET" action="{{ route('product.index') }}" class="header-search">
+        {{--<form method="GET" action="{{ route('product.index') }}" class="header-search">--}}
+        <form method="GET" action="{{ url()->current() }}" class="header-search">
           <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？" class="search-input">
         </form>
 

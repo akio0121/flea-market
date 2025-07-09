@@ -10,11 +10,10 @@
     <a href="{{ url('/') }}" class="tab-link {{ request('tab') !== 'mylist' ? 'active' : '' }}">
         おすすめ
     </a>
-    @auth
-    <a href="{{ url('/') }}?tab=mylist" class="tab-link {{ request('tab') === 'mylist' ? 'active' : '' }}">
+    <a href="{{ url('/') }}?tab=mylist&keyword={{ request('keyword') }}"
+        class="tab-link {{ request('tab') === 'mylist' ? 'active' : '' }}">
         マイリスト
     </a>
-    @endauth
 </div>
 
 <hr class="tab-divider">

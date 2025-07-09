@@ -27,14 +27,14 @@
         </p>
     </div>
 
-{{--購入ボタンフォーム --}}
-<form action="{{ route('product.purchase', $product->id) }}" method="POST" class="purchase-form">
-    @csrf
-    <input type="hidden" name="payment_id" value="{{ request('payment_id') }}">
-    <button type="submit" class="btn custom-purchase-button">
-        購入する
-    </button>
-</form>
+    {{--購入ボタンフォーム --}}
+    <form action="{{ route('product.purchase', $product->id) }}" method="POST" class="purchase-form">
+        @csrf
+        <input type="hidden" name="payment_id" value="{{ request('payment_id') }}">
+        <button type="submit" class="btn custom-purchase-button">
+            購入する
+        </button>
+    </form>
 </div>
 <hr class="section-divider">
 
@@ -59,11 +59,13 @@
 
 <hr class="section-divider">
 
+@auth
 <div class="address-info">
-    <p>〒{{ session('recipient_post', $product->user->post) }}</p>
-    <p>{{ session('recipient_address', $product->user->address) }}</p>
-    <p>{{ session('recipient_building', $product->user->building) }}</p>
+    <p>〒{{ session('recipient_post', Auth::user()->post) }}</p>
+    <p>{{ session('recipient_address', Auth::user()->address) }}</p>
+    <p>{{ session('recipient_building', Auth::user()->building) }}</p>
 </div>
+@endauth
 
 <a href="{{ route('product.address.edit', $product->id) }}" class="btn btn-secondary">
     変更する

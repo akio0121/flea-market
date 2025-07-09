@@ -18,12 +18,11 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('payment_id');
             $table->foreignId('product_id');
-            $table->text('recipient_post')->nullable();
-            $table->text('recipient_address')->nullable();
-            $table->text('recipient_building')->nullable();
+            $table->text('recipient_post');
+            $table->text('recipient_address');
+            $table->text('recipient_building');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
-
         });
     }
 

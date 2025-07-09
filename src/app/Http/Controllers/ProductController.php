@@ -124,11 +124,11 @@ class ProductController extends Controller
     //商品を購入する
     public function purchase(PurchaseRequest $request, Product $product)
     {
-
+        $user = auth()->user();
         // セッションから配送先情報を取得
-        $recipient_post = session('recipient_post');
-        $recipient_address = session('recipient_address');
-        $recipient_building = session('recipient_building');
+        $recipient_post = session('recipient_post') ?: $user->post;
+        $recipient_address = session('recipient_address') ?: $user->address;
+        $recipient_building = session('recipient_building') ?: $user->building;
 
         Order::create([
             'user_id' => auth()->id(),

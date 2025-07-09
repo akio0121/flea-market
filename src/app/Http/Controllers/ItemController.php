@@ -20,13 +20,20 @@ class ItemController extends Controller
 
         $query = Product::query();
 
-        if ($tab === 'mylist' && $currentUserId) {
-            // Goodモデルからuser_idがログインユーザーのものだけ取得し、product_idだけ抜き出す
-            $productIds = Good::where('user_id', $currentUserId)->pluck('product_id');
+        if ($tab === 'mylist') {
+            if ($currentUserId) {
+                // ログイン済み → いいねした商品を取得
+                $productIds = Good::where('user_id', $currentUserId)->pluck('product_id');
+                $query->whereIn('id', $productIds);
+            } else {
+                // 未ログイン → 空の商品リストを渡す
+                $products = collect(); // 空のコレクション
+                $soldProductIds = Order::pluck('product_id')->unique()->toArray();
 
-            // そのproduct_idのものだけ絞り込む
-            $query->whereIn('id', $productIds);
+                return view('index', compact('products', 'header', 'keyword', 'tab', 'soldProductIds'));
+            }
         } elseif ($currentUserId) {
+            // ログイン中 → 自分以外の商品を表示
             $query->where('user_id', '!=', $currentUserId);
         }
 

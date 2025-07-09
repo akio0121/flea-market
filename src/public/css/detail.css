@@ -90,6 +90,12 @@
     margin-top: 10px;
 }
 
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
 @media (min-width: 1400px) and (max-width: 1540px) {
     .product-detail-container {
         gap: 60px;

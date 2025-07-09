@@ -92,9 +92,11 @@
             @csrf
             <textarea name="name" class="comment-textarea"></textarea>
             <br>
-            @error('name')
-            {{ $message }}
-            @enderror
+            <div class="form__error">
+                @error('name')
+                {{ $message }}
+                @enderror
+            </div>
             <button type="submit" class="primary-button">コメントを送信する</button>
         </form>
     </div>

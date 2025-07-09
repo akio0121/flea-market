@@ -25,8 +25,9 @@ class ExhibitionRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'condition_id' => 'required',
-            'category_ids' => 'required',
+            'condition_id' => ['required', 'exists:conditions,id'],
+            'category_ids' => ['required', 'array'],
+            'category_ids.*' => ['integer', 'exists:categories,id'],
             'description' => 'required|max:255',
             'price' => ['required', 'numeric', 'min:0'],
             'image' => ['required', 'regex:/\.(jpe?g|png)$/i'], // ←ファイルではなくパス文字列

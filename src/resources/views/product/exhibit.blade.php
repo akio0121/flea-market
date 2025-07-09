@@ -18,7 +18,7 @@
     </div>
     @endif
 
-    <!-- 画像アップロード用フォーム -->
+    <!-- 画像アップロード用フォーム（別フォーム） -->
     <form method="POST" action="{{ route('image.upload') }}" enctype="multipart/form-data">
         @csrf
         <label class="select-image-button">
@@ -33,40 +33,39 @@
         @enderror
     </div>
 
-    <!-- 出品フォーム（ここでhiddenに画像パスを持たせる） -->
-    <h2 class="section-title">商品の詳細</h2>
-
-    <h3>カテゴリー</h3>
-    <div class="category-checkboxes">
-        @foreach ($categories as $category)
-        <label class="category-label">
-            <input type="checkbox" name="category_ids[]" value="{{ $category->id }}">
-            {{ $category->name }}
-        </label>
-        @endforeach
-    </div>
-    <div class="form__error">@error('category_ids') {{ $message }} @enderror</div>
-
-
-    <h3>商品の状態</h3>
-    <select name="condition_id">
-        <option value="">-- 選択してください --</option>
-        @foreach($conditions as $condition)
-        <option value="{{ $condition->id }}" {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
-            {{ $condition->name }}
-        </option>
-        @endforeach
-    </select>
-    <div class="form__error">@error('category_ids') {{ $message }} @enderror</div>
-
-
-    <h2 class="section-title">商品名と説明</h2>
-
+    <!-- 出品フォーム -->
     <form method="POST" action="{{ route('products.store') }}">
         @csrf
 
         <!-- 画像パスを hidden で渡す -->
         <input type="hidden" name="image" value="{{ session('imagePath') }}">
+
+        <h2 class="section-title">商品の詳細</h2>
+
+        <h3>カテゴリー</h3>
+        <div class="category-checkboxes">
+            @foreach ($categories as $category)
+            <label class="category-label">
+                <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
+                    {{ is_array(old('category_ids')) && in_array($category->id, old('category_ids')) ? 'checked' : '' }}>
+                {{ $category->name }}
+            </label>
+            @endforeach
+        </div>
+        <div class="form__error">@error('category_ids') {{ $message }} @enderror</div>
+
+        <h3>商品の状態</h3>
+        <select name="condition_id">
+            <option value="">-- 選択してください --</option>
+            @foreach($conditions as $condition)
+            <option value="{{ $condition->id }}" {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
+                {{ $condition->name }}
+            </option>
+            @endforeach
+        </select>
+        <div class="form__error">@error('condition_id') {{ $message }} @enderror</div>
+
+        <h2 class="section-title">商品名と説明</h2>
 
         <label for="name">商品名</label>
         <input type="text" id="name" name="name" value="{{ old('name') }}">
@@ -83,12 +82,8 @@
         <input type="text" id="price" name="price" value="{{ old('price') }}">
         <div class="form__error">@error('price') {{ $message }} @enderror</div>
 
-
-
-
-
-
         <button type="submit">出品する</button>
     </form>
 </div>
+
 @endsection
