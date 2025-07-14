@@ -50,4 +50,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'product_categories');
     }
+
+    public function deals()
+    {
+        return $this->hasMany(Deal::class);
+    }
+
+    public function assessment()
+    {
+        return $this->hasOne(Assessment::class);
+    }
 }

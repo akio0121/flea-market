@@ -35,5 +35,15 @@ class UsersTableSeeder extends Seeder
             'building' => 'ハイツ岩国'
         ];
         DB::table('users')->insert($param);
+
+        $param = [
+            'name' => 'testC',
+            'email' => 'ccc@ddd.com',
+            'password' => Hash::make('cccccccc'),
+            'post' => '345-6789',
+            'address' => '島根県松江市',
+            'building' => 'ハイツ松江'
+        ];
+        DB::table('users')->insert($param);
     }
 }

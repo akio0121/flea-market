@@ -32,8 +32,7 @@ Route::post('/register', [UserController::class, 'create']);
 //プロフィール設定画面を表示する
 Route::get('/mypage/profile', [MypageController::class, 'edit']);
 
-//プロフィール設定画面で郵便番号等を入力する
-Route::post('/mypage/profile', [MypageController::class, 'setting']);
+
 
 //プロフィール設定画面で画像を変更する
 Route::post('/profile/preview', [MypageController::class, 'preview'])->name('profile.preview');
@@ -76,4 +75,7 @@ Route::middleware('auth')->group(function () {
 
     //送付先住所変更画面で、変更した住所をセッションに保存
     Route::post('/purchase/address/{product}', [ProductController::class, 'storeAddress'])->name('product.address.store');
+
+    //プロフィール設定画面で郵便番号等を入力する
+    Route::post('/mypage/profile', [MypageController::class, 'setting']);
 });
