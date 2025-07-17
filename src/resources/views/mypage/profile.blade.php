@@ -28,6 +28,11 @@
 
     <div>
         <h2>取引評価点数</h2>
+        @if($averageRating)
+        <p>{{ $averageRating }} 点</p>
+        @else
+        <p>まだ評価がありません</p>
+        @endif
     </div>
 
     <div>

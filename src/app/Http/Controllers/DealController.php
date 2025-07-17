@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Deal;
+use App\Models\Assessment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DealRequest;
+use Illuminate\Support\Facades\Storage;
 
 class DealController extends Controller
 {
@@ -58,19 +60,23 @@ class DealController extends Controller
             ->where('read_flg', 0)
             ->update(['read_flg' => 1]);
 
+        //この商品の評価があるか判定
+        $hasAssessment = \App\Models\Assessment::where('product_id', $product->id)->exists();
+
         return view('product.deal', [
             'product'       => $product,        // 今表示中の商品
             'dealProducts'  => $dealProducts,   // サイドバー用の取引中商品一覧
             'messages'      => $messages,       // チャット履歴
             'header'        => $header,
-            'unreadCounts'  => $unreadCounts, // ← 商品ごとの未読件数
+            'unreadCounts'  => $unreadCounts, // 商品ごとの未読件数
+            'hasAssessment' => $hasAssessment,
         ]);
     }
 
     //取引用ページで、取引チャットを行う
     public function sendDealMessage(DealRequest $request, Product $product)
     {
-        
+
         $imagePath = null;
 
         // 画像が送信された場合、アップロード処理
@@ -88,5 +94,61 @@ class DealController extends Controller
 
         return redirect()->route('products.deal', ['product' => $product->id]);
     }
-}
 
+    // メッセージ更新（編集）
+    public function updateDealMessage(Request $request, Deal $deal)
+    {
+        // 編集できるのは自分のメッセージのみ
+        if ($deal->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        if ($request->hasFile('image')) {
+            // 古い画像を削除（あれば）
+            if ($deal->image) {
+                Storage::disk('public')->delete($deal->image);
+            }
+            $deal->image = $request->file('image')->store('deal_images', 'public');
+        }
+
+        $deal->name = $request->input('name');
+        $deal->save();
+
+        return redirect()->route('products.deal', ['product' => $deal->product_id]);
+    }
+
+    // メッセージ削除
+    public function destroyDealMessage(Deal $deal)
+    {
+        // 削除できるのは自分のメッセージのみ
+        if ($deal->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // 画像もあれば削除
+        if ($deal->image) {
+            Storage::disk('public')->delete($deal->image);
+        }
+
+        $deal->delete();
+
+        return redirect()->route('products.deal', ['product' => $deal->product_id]);
+    }
+
+    //取引完了ボタンを押して、出品者を評価する
+    public function complete(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'point' => 'required|integer|min:1|max:5',
+        ]);
+
+        // 評価を保存（assessmentsテーブルを作る）
+        Assessment::create([
+            'product_id'   => $product->id,
+            'user_id'    => $product->user_id,  // 出品者のuser_id
+            'point' => (int) $validated['point'], // 数値として保存
+
+        ]);
+        return redirect('/');
+    }
+}

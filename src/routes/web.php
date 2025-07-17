@@ -86,4 +86,13 @@ Route::middleware('auth')->group(function () {
 
     //取引用ページで取引チャットを行う
     Route::post('/deal/{product}/message', [DealController::class, 'sendDealMessage'])->name('deal.message.send');
+
+    // 取引メッセージを編集する
+    Route::put('/deal/message/{deal}', [DealController::class, 'updateDealMessage'])->name('deal.message.update');
+
+    //取引メッセージ削除する
+    Route::delete('/deal/message/{deal}', [DealController::class, 'destroyDealMessage'])->name('deal.message.destroy');
+
+    //取引完了ボタンを押して、出品者を評価する
+    Route::post('/deal/{product}/complete', [DealController::class, 'complete'])->name('deal.complete');
 });

@@ -63,6 +63,11 @@ class MypageController extends Controller
         $tab = request('tab');
         $keyword = request('keyword'); // 検索キーワード取得
 
+        //ログインユーザーの評価の平均値を取得
+        $averageRating = \App\Models\Assessment::where('user_id', $user->id)->avg('point');
+        // 四捨五入して整数にする
+        $averageRating = $averageRating ? round($averageRating) : null;
+
         if ($tab === 'buy') {
             // 購入した商品
             $orders = $user->orders()->with(['product' => function ($query) use ($keyword) {
@@ -154,7 +159,8 @@ class MypageController extends Controller
             'keyword',
             'productLinkRoute',
             'unreadCount',   // 全体の未読件数
-            'unreadCounts'   // 商品ごとの未読件数
+            'unreadCounts',   // 商品ごとの未読件数
+            'averageRating' //評価の平均値
         ));
     }
 }
