@@ -17,7 +17,8 @@ class CreateDealsTable extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->foreignId('user_id');
-            $table->text('name')->nullable();
+            $table->string('name')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('read_flg')->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

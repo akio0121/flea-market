@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\DealController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ Route::post('/profile/preview', [MypageController::class, 'preview'])->name('pro
 Route::get('/', [ItemController::class, 'index'])->name('product.index');
 
 //商品詳細画面を表示する
-Route::get('/item/{product}', [ProductController::class, 'detail']);
+Route::get('/item/{product}', [ProductController::class, 'detail'])->name('products.detail');
 
 
 Route::middleware('auth')->group(function () {
@@ -78,4 +79,11 @@ Route::middleware('auth')->group(function () {
 
     //プロフィール設定画面で郵便番号等を入力する
     Route::post('/mypage/profile', [MypageController::class, 'setting']);
+
+    // 取引用ページを表示する
+    Route::get('/deal/{product}', [DealController::class, 'showDeal'])
+        ->name('products.deal');
+
+    //取引用ページで取引チャットを行う
+    Route::post('/deal/{product}/message', [DealController::class, 'sendDealMessage'])->name('deal.message.send');
 });

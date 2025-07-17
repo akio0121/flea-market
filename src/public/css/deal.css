@@ -1,0 +1,55 @@
+    .deal-container {
+        display: flex;
+    }
+
+    /* 左側サイドバー */
+    .sidebar {
+        width: 200px;
+        background: #f5f5f5;
+        padding: 10px;
+        overflow-y: auto;
+        height: calc(100vh - 60px);
+    }
+
+    .sidebar .product-thumb {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .sidebar .product-thumb img {
+        width: 100%;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    /* 右側メイン */
+    .deal-main {
+        flex: 1;
+        padding: 20px;
+    }
+
+        .product-thumb {
+            position: relative;
+            display: inline-block;
+        }
+    
+        .unread-badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .form__error {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }

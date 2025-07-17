@@ -25,6 +25,15 @@
             <button type="button" class="edit-profile-button">プロフィールを編集</button>
         </a>
     </div>
+
+    <div>
+        <h2>取引評価点数</h2>
+    </div>
+
+    <div>
+        <h2>新規取引メッセージ件数</h2>
+        {{ $unreadCount }}
+    </div>
 </div>
 
 @php
@@ -40,26 +49,36 @@ $currentTab = request()->query('tab');
     <a href="{{ url('/mypage?tab=buy') }}" class="tab-link {{ $currentTab === 'buy' ? 'active' : '' }}">
         購入した商品
     </a>
+
+    <a href="{{ url('/mypage?tab=deal') }}" class="tab-link {{ $currentTab === 'deal' ? 'active' : '' }}">
+        取引中の商品
+    </a>
     @endauth
 </div>
 
 <hr class="tab-divider">
 
 <div class="product-list">
-    @foreach ($products as $product)
+    @foreach($products as $product)
     <div class="product-card">
-        <a class="image" href="/item/{{$product->id}}">
+        <a href="{{ route($productLinkRoute, $product->id) }}">
+            {{-- 商品画像 --}}
             <img class="product-image"
                 src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
-                alt="">
-        </a>
-        <p class="product-name">{{ $product->name }}</p>
+                alt="{{ $product->name }}">
 
-        {{-- SOLD ラベル（出品商品のときだけ表示） --}}
-        @if(isset($soldProductIds) && in_array($product->id, $soldProductIds))
-        <span class="sold-label">SOLD</span>
+            {{-- 未読メッセージ件数バッジ（取引タブのみ表示）--}}
+            @if(request('tab') === 'deal' && isset($unreadCounts[$product->id]) && $unreadCounts[$product->id] > 0)
+            <span class="badge">{{ $unreadCounts[$product->id] }}</span>
+            @endif
+        </a>
+
+        {{-- SOLD 表示は $soldProductIds がある場合だけ --}}
+        @if(in_array($product->id, $soldProductIds))
+        <span class="sold-label">Sold</span>
         @endif
 
+        <p class="product-name">{{ $product->name }}</p>
     </div>
     @endforeach
 </div>
