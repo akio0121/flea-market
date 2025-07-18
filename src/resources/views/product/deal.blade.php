@@ -88,12 +88,17 @@
             {{-- チャット送信フォーム --}}
             <form action="{{ route('deal.message.send', ['product' => $product->id]) }}" method="POST" class="chat-form" enctype="multipart/form-data">
                 @csrf
-                <textarea name="name" rows="3" placeholder="メッセージを入力してください..." required>{{ old('name') }}</textarea>
+                <textarea name="name" rows="3" placeholder="メッセージを入力してください...">{{ old('name') }}</textarea>
+                <div class="form__error">
+                    @error('name')
+                    {{ $message }}
+                    @enderror
+                </div>
 
                 {{-- 画像アップロード --}}
                 <input type="file" name="image" accept="image/*">
 
-                <button type="submit" class="chat-send-btn">送信</button>
+                <button type="submit" name="action" value="send" class="chat-send-btn">送信</button>
             </form>
 
             @php
