@@ -1,0 +1,229 @@
+HELO:<localhost>
+FROM:<noreply@example.com>
+TO:<bbb@ccc.com>
+
+Message-ID: <5498f29805bd233fea521943a4bd4937@localhost>
+Date: Fri, 18 Jul 2025 21:27:17 +0900
+Subject: =?utf-8?Q?=E3=80=90=E5=8F=96=E5=BC=95=E5=AE=8C?=
+ =?utf-8?Q?=E4=BA=86=E3=80=91=E3=83=9E=E3=82=A4=E3=82=AF?=
+From: Laravel <noreply@example.com>
+To: bbb@ccc.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="_=_swift_1752841637_e4cb3598ff8943629ad8c71a8bdfe1d7_=_"
+
+
+--_=_swift_1752841637_e4cb3598ff8943629ad8c71a8bdfe1d7_=_
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+[Laravel](http://localhost)
+
+# =E5=8F=96=E5=BC=95=E5=AE=8C=E4=BA=86=
+=E3=81=AE=E3=81=8A=E7=9F=A5=E3=82=89=E3=81=9B
+
+testA =E3=81=95=E3=82=
+=93=E3=81=8C=E3=80=81=E4=BB=A5=E4=B8=8B=E3=81=AE=E5=95=86=E5=93=81=E3=82=
+=92=E5=8F=96=E5=BC=95=E5=AE=8C=E4=BA=86=E3=81=AB=E3=81=97=E3=81=BE=E3=81=
+=97=E3=81=9F=E3=80=82
+
+**=E5=95=86=E5=93=81=E5=90=8D:** =E3=83=9E=
+=E3=82=A4=E3=82=AF
+
+---
+
+=E3=81=93=E3=82=8C=E3=81=A7=E5=8F=96=
+=E5=BC=95=E3=81=8C=E5=AE=8C=E4=BA=86=E3=81=97=E3=81=BE=E3=81=97=E3=81=9F=
+=E3=80=82=E3=81=82=E3=82=8A=E3=81=8C=E3=81=A8=E3=81=86=E3=81=94=E3=81=96=
+=E3=81=84=E3=81=BE=E3=81=97=E3=81=9F=EF=BC=81
+
+=C2=A9 2025 Laravel. All=
+ rights reserved.
+
+
+--_=_swift_1752841637_e4cb3598ff8943629ad8c71a8bdfe1d7_=_
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.=
+w3.org/1999/xhtml">
+<head>
+<meta name=3D"viewport" content=3D"width=3Dd=
+evice-width, initial-scale=3D1.0">
+<meta http-equiv=3D"Content-Type" cont=
+ent=3D"text/html; charset=3DUTF-8">
+<meta name=3D"color-scheme" content=
+=3D"light">
+<meta name=3D"supported-color-schemes" content=3D"light">
+<=
+style>
+@media  only screen and (max-width: 600px) {
+.inner-body {
+wid=
+th: 100% !important;
+}
+
+.footer {
+width: 100% !important;
+}
+}=
+
+
+@media  only screen and (max-width: 500px) {
+.button {
+width: 100=
+% !important;
+}
+}
+</style>
+</head>
+<body style=3D"box-sizing: bor=
+der-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto=
+, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Seg=
+oe UI Symbol'; position: relative; -webkit-text-size-adjust: none; backgrou=
+nd-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: =
+0; padding: 0; width: 100% !important;">
+
+<table class=3D"wrapper" widt=
+h=3D"100%" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=
+=3D"box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont,=
+ 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Se=
+goe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpaddin=
+g: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: =
+#edf2f7; margin: 0; padding: 0; width: 100%;"><tr>
+<td align=3D"center" s=
+tyle=3D"box-sizing: border-box; font-family: -apple-system, BlinkMacSystemF=
+ont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',=
+ 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class=
+=3D"content" width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" role=3D"pre=
+sentation" style=3D"box-sizing: border-box; font-family: -apple-system, Bli=
+nkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple C=
+olor Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -prem=
+ailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; ma=
+rgin: 0; padding: 0; width: 100%;">
+<tr>
+<td class=3D"header" style=3D"=
+box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Se=
+goe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe =
+UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 25px 0; text-ali=
+gn: center;">
+<a href=3D"http://localhost" style=3D"box-sizing: border-bo=
+x; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helv=
+etica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI =
+Symbol'; position: relative; color: #3d4852; font-size: 19px; font-weight: =
+bold; text-decoration: none; display: inline-block;">
+<img src=3D"https:/=
+/laravel.com/img/notification-logo.png" class=3D"logo" alt=3D"Laravel Logo"=
+ style=3D"box-sizing: border-box; font-family: -apple-system, BlinkMacSyste=
+mFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji=
+', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100%=
+; border: none; height: 75px; max-height: 75px; width: 75px;"></a>
+</td>=
+
+</tr>
+<!-- Email Body --><tr>
+<td class=3D"body" width=3D"100%" cell=
+padding=3D"0" cellspacing=3D"0" style=3D"box-sizing: border-box; font-famil=
+y: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,=
+ sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; posi=
+tion: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -prem=
+ailer-width: 100%; background-color: #edf2f7; border-bottom: 1px solid #edf=
+2f7; border-top: 1px solid #edf2f7; margin: 0; padding: 0; width: 100%;">=
+
+<table class=3D"inner-body" align=3D"center" width=3D"570" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"box-sizing: border-=
+box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He=
+lvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe U=
+I Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellsp=
+acing: 0; -premailer-width: 570px; background-color: #ffffff; border-color:=
+ #e8e5ef; border-radius: 2px; border-width: 1px; box-shadow: 0 2px 0 rgba(0=
+, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015); margin: 0 auto; padding=
+: 0; width: 570px;">
+<!-- Body content --><tr>
+<td class=3D"content-cel=
+l" style=3D"box-sizing: border-box; font-family: -apple-system, BlinkMacSys=
+temFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emo=
+ji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 10=
+0vw; padding: 32px;">
+<h1 style=3D"box-sizing: border-box; font-family: -=
+apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, san=
+s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position=
+: relative; color: #3d4852; font-size: 18px; font-weight: bold; margin-top:=
+ 0; text-align: left;">=E5=8F=96=E5=BC=95=E5=AE=8C=E4=BA=86=E3=81=AE=
+=E3=81=8A=E7=9F=A5=E3=82=89=E3=81=9B</h1>
+<p style=3D"box-sizing: border-=
+box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He=
+lvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe U=
+I Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-=
+top: 0; text-align: left;">testA =E3=81=95=E3=82=93=E3=81=8C=E3=80=81=
+=E4=BB=A5=E4=B8=8B=E3=81=AE=E5=95=86=E5=93=81=E3=82=92=E5=8F=96=E5=BC=95=
+=E5=AE=8C=E4=BA=86=E3=81=AB=E3=81=97=E3=81=BE=E3=81=97=E3=81=9F=E3=80=82</p=
+>
+<p style=3D"box-sizing: border-box; font-family: -apple-system, BlinkMa=
+cSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color=
+ Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size=
+: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style=
+=3D"box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont,=
+ 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Se=
+goe UI Emoji', 'Segoe UI Symbol'; position: relative;">=E5=95=86=E5=93=
+=81=E5=90=8D:</strong> =E3=83=9E=E3=82=A4=E3=82=AF</p>
+<hr style=3D"box-s=
+izing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe U=
+I', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Em=
+oji', 'Segoe UI Symbol'; position: relative;">
+<p style=3D"box-sizing: bo=
+rder-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot=
+o, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Se=
+goe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; ma=
+rgin-top: 0; text-align: left;">=E3=81=93=E3=82=8C=E3=81=A7=E5=8F=96=
+=E5=BC=95=E3=81=8C=E5=AE=8C=E4=BA=86=E3=81=97=E3=81=BE=E3=81=97=E3=81=9F=
+=E3=80=82=E3=81=82=E3=82=8A=E3=81=8C=E3=81=A8=E3=81=86=E3=81=94=E3=81=96=
+=E3=81=84=E3=81=BE=E3=81=97=E3=81=9F=EF=BC=81</p>
+
+
+
+</td>
+</tr>=
+
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"box-sizing: border-box; f=
+ont-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetic=
+a, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symb=
+ol'; position: relative;">
+<table class=3D"footer" align=3D"center" width=
+=3D"570" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D=
+"box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'S=
+egoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe=
+ UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: =
+0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padd=
+ing: 0; text-align: center; width: 570px;"><tr>
+<td class=3D"content-cell=
+" align=3D"center" style=3D"box-sizing: border-box; font-family: -apple-sys=
+tem, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, =
+'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relativ=
+e; max-width: 100vw; padding: 32px;">
+<p style=3D"box-sizing: border-box;=
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvet=
+ica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Sy=
+mbol'; position: relative; line-height: 1.5em; margin-top: 0; color: #b0adc=
+5; font-size: 12px; text-align: center;">=C2=A9 2025 Laravel. All rights re=
+served.</p>
+
+</td>
+</tr></table>
+</td>
+</tr>
+</table>
+</td>=
+
+</tr></table>
+</body>
+</html>
+
+--_=_swift_1752841637_e4cb3598ff8943629ad8c71a8bdfe1d7_=_--

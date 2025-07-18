@@ -12,6 +12,7 @@ class Assessment extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'rater_id',
         'point'
     ];
 

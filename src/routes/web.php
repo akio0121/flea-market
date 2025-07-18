@@ -93,6 +93,10 @@ Route::middleware('auth')->group(function () {
     //取引メッセージ削除する
     Route::delete('/deal/message/{deal}', [DealController::class, 'destroyDealMessage'])->name('deal.message.destroy');
 
-    //取引完了ボタンを押して、出品者を評価する
+    //取引完了ボタンを押して、出品者を評価する（購入者＞出品者）
     Route::post('/deal/{product}/complete', [DealController::class, 'complete'])->name('deal.complete');
+
+    //取引完了ボタンを押して、出品者を評価する（出品者＞購入者）
+    Route::post('/deal/{product}/complete-buyer', [DealController::class, 'completeBuyerRating'])
+        ->name('deal.complete.buyer');
 });

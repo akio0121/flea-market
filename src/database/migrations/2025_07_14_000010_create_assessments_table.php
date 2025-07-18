@@ -17,6 +17,7 @@ class CreateAssessmentsTable extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->foreignId('user_id');
+            $table->unsignedBigInteger('rater_id');
             $table->tinyInteger('point');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

@@ -65,7 +65,6 @@ class MypageController extends Controller
 
         //ログインユーザーの評価の平均値を取得
         $averageRating = \App\Models\Assessment::where('user_id', $user->id)->avg('point');
-        // 四捨五入して整数にする
         $averageRating = $averageRating ? round($averageRating) : null;
 
         if ($tab === 'buy') {
@@ -77,9 +76,8 @@ class MypageController extends Controller
             }])->get();
 
             $products = $orders->pluck('product');
-            $soldProductIds = []; // 購入商品には SOLD ラベル不要
-            $productLinkRoute = 'products.detail'; // ← 購入タブは detail.blade.php
-
+            $soldProductIds = [];
+            $productLinkRoute = 'products.detail';
         } elseif ($tab === 'deal') {
             // 取引中の商品
 
@@ -106,22 +104,28 @@ class MypageController extends Controller
             // 両方マージ
             $products = $boughtProducts->merge($soldProducts);
 
-            //各商品ごとの最新メッセージ日時を取得
+            // === ここで評価済みの商品IDを取得して除外する ===
+            $ratedProductIds = \App\Models\Assessment::where('rater_id', $user->id)
+                ->pluck('product_id')
+                ->toArray();
+
+            $products = $products->reject(function ($product) use ($ratedProductIds) {
+                return in_array($product->id, $ratedProductIds);
+            });
+
+            // 各商品ごとの最新メッセージ日時を取得
             $latestMessageTimes = \App\Models\Deal::whereIn('product_id', $products->pluck('id'))
                 ->selectRaw('product_id, MAX(created_at) as latest_message_time')
                 ->groupBy('product_id')
                 ->pluck('latest_message_time', 'product_id');
 
-            //最新メッセージが新しい順にソート
+            // 最新メッセージが新しい順にソート
             $products = $products->sortByDesc(function ($product) use ($latestMessageTimes) {
                 return $latestMessageTimes[$product->id] ?? '1970-01-01 00:00:00';
             });
 
-
-            // SOLD ラベルは全て非表示
             $soldProductIds = [];
-            $productLinkRoute = 'products.deal'; // ← 取引タブは deal.blade.php
-
+            $productLinkRoute = 'products.deal';
         } else {
             // 出品した商品
             $query = Product::where('user_id', $user->id);
@@ -136,7 +140,7 @@ class MypageController extends Controller
             $soldProductIds = Order::whereIn('product_id', $products->pluck('id'))
                 ->pluck('product_id')->toArray();
 
-            $productLinkRoute = 'products.detail'; // ← 出品タブは detail.blade.php
+            $productLinkRoute = 'products.detail';
         }
 
         //未読件数（自分以外が送ったメッセージ かつ 未読）
@@ -158,9 +162,9 @@ class MypageController extends Controller
             'soldProductIds',
             'keyword',
             'productLinkRoute',
-            'unreadCount',   // 全体の未読件数
-            'unreadCounts',   // 商品ごとの未読件数
-            'averageRating' //評価の平均値
+            'unreadCount',
+            'unreadCounts',
+            'averageRating'
         ));
     }
 }

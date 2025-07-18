@@ -1,0 +1,14 @@
+HELO:<[127.0.0.1]>
+FROM:<noreply@example.com>
+TO:<test@example.com>
+
+Message-ID: <2c2cee0ae89e0b60ad0421d812c97678@swift.generated>
+Date: Fri, 18 Jul 2025 21:26:43 +0900
+Subject: MailHog Test
+From: Laravel <noreply@example.com>
+To: test@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+MailHog

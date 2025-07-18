@@ -10,11 +10,18 @@ services:
       - ./src:/var/www/
     depends_on:
       - php
+    networks:
+      - flea-network
 
   php:
     build: ./docker/php
     volumes:
       - ./src:/var/www/
+    depends_on:
+      - mysql
+      - mailhog
+    networks:
+      - flea-network
 
   mysql:
     image: mysql:8.0.26
@@ -28,6 +35,8 @@ services:
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - flea-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -40,3 +49,23 @@ services:
       - mysql
     ports:
       - 8080:80
+    networks:
+      - flea-network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: flea-market-mailhog
+    ports:
+      - "8025:8025" # Web UI
+      - "1025:1025" # SMTP
+    environment:
+      MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /maildir
+    volumes:
+      - ./maildir:/maildir
+    networks:
+      - flea-network
+
+networks:
+  flea-network:
+    driver: bridge

@@ -101,6 +101,7 @@
             $buyer = \App\Models\Order::where('product_id', $product->id)->first();
             @endphp
 
+            {{-- 購入者だけ取引完了ボタンを表示 --}}
             @if(Auth::check() && $buyer && Auth::id() === $buyer->user_id)
             <div class="deal-complete-section">
                 {{-- モーダルを開くリンク --}}
@@ -110,13 +111,16 @@
             </div>
             @endif
 
-            {{-- ===== モーダル本体 ===== --}}
+            {{-- ===== 購入者が出品者を評価するモーダル ===== --}}
             <div id="modal-rating" class="modal">
                 <div class="modal-content">
-                    <h3>評価してください</h3>
+                    <h3>出品者を評価してください</h3>
 
                     <form action="{{ route('deal.complete', $product->id) }}" method="POST">
                         @csrf
+
+                        {{-- 評価者IDも渡す --}}
+                        <input type="hidden" name="rater_id" value="{{ Auth::id() }}">
 
                         <label>
                             評価：
@@ -142,6 +146,36 @@
                     </form>
                 </div>
             </div>
+
+            {{-- ===== 出品者が購入者を評価するモーダル（自動表示用） ===== --}}
+            @if($showBuyerRatingModal)
+            <div id="modal-buyer-rating" class="modal show" style="display:block;">
+                <div class="modal-content">
+                    <h3>購入者を評価してください</h3>
+
+                    <form action="{{ route('deal.complete.buyer', $product->id) }}" method="POST">
+                        @csrf
+
+                        <label>
+                            評価：
+                            <select name="point" required>
+                                <option value="">選択してください</option>
+                                <option value="5">非常に良い(5点)</option>
+                                <option value="4">良い(4点)</option>
+                                <option value="3">普通(3点)</option>
+                                <option value="2">悪い(2点)</option>
+                                <option value="1">非常に悪い(1点)</option>
+                            </select>
+                        </label>
+                        <div style="margin-top:10px;">
+                            <button type="submit" style="padding:8px 15px; background:#007bff; color:#fff; border:none; border-radius:5px;">
+                                評価を送信
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @endif
 
         </div>
     </div>
