@@ -1,3 +1,4 @@
+/* 共通のプロフィールアイコン */
 .profile-icon {
     width: 150px;
     height: 150px;
@@ -38,8 +39,7 @@
     transition: background-color 0.3s;
 }
 
-
-/* 商品一覧 */
+/* 商品一覧（共通） */
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -84,10 +84,10 @@
 
 .tab-buttons {
     display: flex;
-        gap: 20px;
-        justify-content: flex-start;
-        margin-top: 30px;
-        padding-left: 200px;
+    gap: 20px;
+    justify-content: flex-start;
+    margin-top: 30px;
+    padding-left: 200px;
 }
 
 .tab-link.active {
@@ -115,22 +115,62 @@
     text-align: center;
 }
 
-/* --- PC表示用（1400～1540px） --- */
+/* ✅ 統計情報は常に縦積み */
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    /* ← 常に縦並び */
+    gap: 8px;
+    /* 項目の間隔 */
+    align-items: flex-start;
+    /* 左寄せ */
+}
+
+.profile-stats .stat-item {
+    display: flex;
+    align-items: baseline;
+    /* ラベルと値の高さ揃え */
+    gap: 6px;
+    font-size: 16px;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.stat-value {
+    color: #e44141;
+    font-weight: bold;
+}
+
+/* ---  PC表示用（1400～1540px） --- */
 @media (min-width: 1400px) and (max-width: 1540px) {
     .product-list {
         grid-template-columns: repeat(4, 1fr);
+        /* PCは4列 */
     }
 }
 
-/* --- タブレット表示用（768～850px） --- */
+/* ---  タブレット表示用（768～850px） --- */
 @media (min-width: 768px) and (max-width: 850px) {
     .product-list {
         grid-template-columns: repeat(2, 1fr);
+        /* タブレットは2列 */
+        margin: 20px;
+        /*  横の余白を少し縮める */
     }
 
     .tab-buttons {
-        flex-direction: row;
-        gap: 16px;
-        padding-left: 16px;
+        flex-wrap: wrap;
+        /*  必要なら折り返す */
+        gap: 12px;
+        padding-left: 20px;
+        /*  左余白を縮める */
+    }
+
+    .profile-stats .stat-item {
+        font-size: 14px;     /* フォントを少し小さく */
+        min-width: 120px;    /* 幅を少し縮める */
     }
 }

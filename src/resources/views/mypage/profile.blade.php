@@ -26,18 +26,23 @@
         </a>
     </div>
 
-    <div>
-        <h2>取引評価点数</h2>
-        @if($averageRating)
-        <p>{{ $averageRating }} 点</p>
-        @else
-        <p>まだ評価がありません</p>
-        @endif
-    </div>
+    <div class="profile-stats">
+        <div class="stat-item">
 
-    <div>
-        <h2>新規取引メッセージ件数</h2>
-        {{ $unreadCount }}
+            <span>取引評価点数</span>
+            <span class="stat-value">
+                @if($averageRating)
+                <p>{{ $averageRating }} 点</p>
+                @else
+                <p>まだ評価がありません</p>
+                @endif
+            </span>
+        </div>
+
+        <div class="stat-item">
+            <span class="stat-label">新規取引メッセージ件数</span>
+            <span class="stat-value">{{ $unreadCount }} 件
+        </div>
     </div>
 </div>
 

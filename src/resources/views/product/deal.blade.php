@@ -51,11 +51,15 @@
                     <form action="{{ route('deal.message.update', $msg->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <textarea name="name" rows="3" required>{{ old('name', $msg->name) }}</textarea>
-                        <input type="file" name="image" accept="image/*">
-                        <button type="submit">更新</button>
-                        {{-- キャンセルは edit_id を外して戻る --}}
-                        <a href="{{ route('products.deal', $product->id) }}">キャンセル</a>
+                        <textarea name="name" class="edit-textarea">{{ old('name', $msg->name) }}</textarea>
+                        <div class="edit-actions-row">
+                            <input type="file" name="image" accept="image/*">
+                            <div class="chat-message-actions">
+                                <button type="submit">更新</button>
+                                {{-- キャンセルは edit_id を外して戻る --}}
+                                <a href="{{ route('products.deal', $product->id) }}">キャンセル</a>
+                            </div>
+                        </div>
                     </form>
                     @else
                     {{-- 通常表示 --}}

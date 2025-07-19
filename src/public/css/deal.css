@@ -9,6 +9,8 @@
         padding: 10px;
         overflow-y: auto;
         height: calc(100vh - 60px);
+        /* メインとの距離を空ける */
+        margin-right: 30px;
     }
 
     .sidebar .product-thumb {
@@ -28,71 +30,245 @@
         padding: 20px;
     }
 
-        .product-thumb {
-            position: relative;
-            display: inline-block;
-        }
-    
-        .unread-badge {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background: red;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            text-align: center;
-            line-height: 20px;
-        }
+    .product-thumb {
+        position: relative;
+        display: inline-block;
+    }
 
-        .form__error {
-            color: red;
-            font-size: 14px;
-            margin-top: 4px;
-        }
+    .unread-badge {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        background: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+    }
 
-                /* モーダルの初期状態（非表示） */
-                .modal {
-                    display: none;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.5);
-                    z-index: 1000;
-                    justify-content: center;
-                    align-items: center;
-                }
-        
-                /* #modal-rating がターゲットになったときに表示 */
-                .modal:target {
-                    display: flex;
-                }
-        
-                /* モーダルの中身 */
-                .modal-content {
-                    background: #fff;
-                    padding: 20px;
-                    border-radius: 8px;
-                    width: 90%;
-                    max-width: 400px;
-                    text-align: center;
-                }
-        
-                .modal-content h3 {
-                    margin-bottom: 15px;
-                }
-        
-                .modal-content textarea {
-                    width: 100%;
-                    margin-top: 8px;
-                }
-        
-                .modal-content select {
-                    width: 100%;
-                    margin-top: 8px;
-                }
+    .form__error {
+        color: red;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    /* モーダルの初期状態（非表示） */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* #modal-rating がターゲットになったときに表示 */
+    .modal:target {
+        display: flex;
+    }
+
+    /* モーダルの中身 */
+    .modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .modal-content h3 {
+        margin-bottom: 15px;
+    }
+
+    .modal-content textarea {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .modal-content select {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    /* チャット送信フォームのテキストエリア */
+    .chat-form textarea {
+    width: 300px;
+    /* 商品画像と同じ横幅 */
+    max-width: 100%;
+    /* 画面が狭い場合は自動調整 */
+    height: 120px;
+    /* 縦幅を広げる */
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+    resize: vertical;
+    /* ユーザーが縦方向だけリサイズ可能 */
+    box-sizing: border-box;
+    }
+
+    /* 取引完了ボタンのコンテナ */
+    .deal-complete-section {
+    margin-top: 50px;
+    /* 少し余白 */
+    text-align: left;
+    /* 左寄せ */
+    margin-top: 20px;
+    }
+
+    /* 取引完了ボタン */
+    .deal-complete-btn {
+    display: inline-block;
+    /* テキストエリアと同じ幅 */
+    width: 300px;
+    /* ここで横幅を固定 */
+    padding: 12px;
+    background: #e53935;
+    /* 赤背景 */
+    color: #fff;
+    /* 白文字 */
+    font-weight: bold;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s;
+    }
+
+/* チャットメッセージ全体のレイアウト */
+.chat-message {
+    display: flex;
+    /* 横並びレイアウト */
+    justify-content: space-between;
+    /* 本文とボタンを左右に配置 */
+    align-items: flex-start;
+    /* 上揃え */
+    padding: 8px;
+    margin-bottom: 10px;
+    background: #f8f8f8;
+    border-radius: 6px;
+}
+
+/* 左側：メッセージ本文 */
+.chat-message-content {
+    max-width: 80%;
+    /* ボタンと被らないように余裕を持たせる */
+    word-break: break-word;
+}
+
+/* 右側：編集・削除ボタンを横並びに */
+.chat-message-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.chat-message-actions a,
+.chat-message-actions button {
+    background: #eee;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    /* 子要素を縦に並べる */
+    gap: 10px;
+    max-width: 300px;
+    /* テキストエリアの幅に合わせるなら */
+}
+
+.chat-form textarea,
+.chat-form input[type="file"],
+.chat-form button {
+    width: 100%;
+    /* 幅を揃える */
+    box-sizing: border-box;
+}
+
+.edit-textarea {
+    width: 100%;
+    /* 横幅いっぱいに */
+    height: 150px;
+    /* 高さを広げる */
+    font-size: 16px;
+    /* 文字サイズを大きめに */
+    padding: 8px;
+    box-sizing: border-box;
+}
+/* 編集フォーム全体 */
+.edit-form {
+    margin-top: 8px;
+}
+
+/* 編集時のファイル選択 + 更新・キャンセルを横並び */
+.edit-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* ファイル選択とボタンの間隔 */
+    margin-top: 8px;
+}
+
+/* 更新・キャンセルボタンは既存のchat-message-actionsと同じ見た目 */
+.chat-message-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.chat-message-actions a,
+.chat-message-actions button {
+    background: #eee;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.chat-message-actions a:hover,
+.chat-message-actions button:hover {
+    background: #ddd;
+}
+
+/* PC用（1400px以上）→ 横並び */
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .edit-actions-row {
+        display: flex;
+        flex-direction: row;
+        /* 横並び */
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+/* タブレット用（768～850px）→ 縦並びに切り替え */
+@media (min-width: 768px) and (max-width: 850px) {
+    .edit-actions-row {
+        display: flex;
+        flex-direction: column;
+        /* 縦並び */
+        align-items: flex-start;
+        /* 左寄せ */
+        gap: 8px;
+    }
+
+    /* ボタンはテキストエリアと同じ幅にする場合 */
+    .chat-message-actions button,
+    .chat-message-actions a {
+        width: 100%;
+        text-align: center;
+    }
+}
