@@ -63,26 +63,21 @@ class DealController extends Controller
         // この商品の評価があるか判定（購入者→出品者）
         $hasAssessment = \App\Models\Assessment::where('product_id', $product->id)->exists();
 
-        /* ▼▼ ここからモーダル表示のための追加ロジック ▼▼ */
-
-        // 購入者情報を取得
+        /* ▼▼ モーダル判定 ▼▼ */
         $buyerOrder = \App\Models\Order::where('product_id', $product->id)->first();
         $buyerId = $buyerOrder ? $buyerOrder->user_id : null;
         $sellerId = $product->user_id;
 
-        // 購入者 → 出品者 の評価が済んでいるか？
         $buyerRatedSeller = \App\Models\Assessment::where('product_id', $product->id)
             ->where('rater_id', $buyerId)
             ->where('user_id', $sellerId)
             ->exists();
 
-        // 出品者 → 購入者 の評価が済んでいるか？
         $sellerRatedBuyer = \App\Models\Assessment::where('product_id', $product->id)
             ->where('rater_id', $sellerId)
             ->where('user_id', $buyerId)
             ->exists();
 
-        // モーダル表示判定
         $showBuyerRatingModal = false;
         if (
             Auth::id() === $sellerId &&   // ログインしているのが出品者
@@ -91,17 +86,28 @@ class DealController extends Controller
         ) {
             $showBuyerRatingModal = true;
         }
-
         /* ▲▲ モーダル判定ここまで ▲▲ */
 
+        /* ▼▼ 取引相手の取得 ▼▼ */
+        $partnerUser = null;
+        if ($user->id === $product->user_id) {
+            // 自分が出品者 → 購入者が取引相手
+            $order = \App\Models\Order::where('product_id', $product->id)->with('user')->first();
+            $partnerUser = $order ? $order->user : null;
+        } else {
+            // 自分が購入者 → 出品者が取引相手
+            $partnerUser = $product->user;
+        }
+
         return view('product.deal', [
-            'product'             => $product,        // 今表示中の商品
-            'dealProducts'        => $dealProducts,   // サイドバー用の取引中商品一覧
-            'messages'            => $messages,       // チャット履歴
-            'header'              => $header,
-            'unreadCounts'        => $unreadCounts,   // 商品ごとの未読件数
-            'hasAssessment'       => $hasAssessment,
-            'showBuyerRatingModal' => $showBuyerRatingModal, // モーダル表示フラグ
+            'product'              => $product,
+            'dealProducts'         => $dealProducts,
+            'messages'             => $messages,
+            'header'               => $header,
+            'unreadCounts'         => $unreadCounts,
+            'hasAssessment'        => $hasAssessment,
+            'showBuyerRatingModal' => $showBuyerRatingModal,
+            'partnerUser'          => $partnerUser,
         ]);
     }
 

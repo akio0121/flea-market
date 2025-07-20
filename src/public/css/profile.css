@@ -18,9 +18,12 @@
 
 .profile-info {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* 縦並びにする */
+    align-items: flex-start;
+    /* 左寄せ（中央にしたいなら center） */
     gap: 20px;
-    white-space: nowrap;
+    /* ボタンと星の間に余白 */
 }
 
 .profile-name {
@@ -94,6 +97,14 @@
     color: #e44141;
 }
 
+.tab-link {
+    position: relative;
+    /* バッジの基準にする */
+    display: inline-block;
+    /* 必須：絶対位置をリンク内に収める */
+    padding-right: 12px;
+}
+
 .tab-divider {
     margin: 20px 0;
     border: none;
@@ -115,7 +126,25 @@
     text-align: center;
 }
 
-/* ✅ 統計情報は常に縦積み */
+.badge-tab {
+    position: absolute;
+        top: -6px;
+        /* 少し上に浮かせる */
+        right: -12px;
+        /* 右にずらす */
+        background: red;
+        color: white;
+        border-radius: 50%;
+        font-size: 11px;
+        min-width: 18px;
+        height: 18px;
+        line-height: 18px;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 統計情報は常に縦積み */
 .profile-stats {
     display: flex;
     flex-direction: column;
@@ -140,8 +169,9 @@
 }
 
 .stat-value {
-    color: #e44141;
+    color: #efb908;
     font-weight: bold;
+    font-size: 30px;
 }
 
 /* ---  PC表示用（1400～1540px） --- */

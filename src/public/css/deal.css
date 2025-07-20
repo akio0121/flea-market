@@ -56,6 +56,49 @@
         margin-top: 4px;
     }
 
+
+
+.product-info-container {
+    display: flex;
+    align-items: center;
+    /* 縦方向中央揃え */
+    gap: 20px;
+    /* 画像とテキストの間にスペース */
+}
+
+.product-image {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.chat-message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* アイコンと名前の間のスペース */
+    margin-bottom: 4px;
+}
+
+.chat-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-form textarea[name="name"] {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    overflow-y: hidden;
+    height: 2em;
+    /* 1行分の高さに固定 */
+    font-size: 16px;
+    padding: 8px;
+}
+
     /* モーダルの初期状態（非表示） */
     .modal {
         display: none;
@@ -101,7 +144,7 @@
 
     /* チャット送信フォームのテキストエリア */
     .chat-form textarea {
-    width: 300px;
+    width: 100%;
     /* 商品画像と同じ横幅 */
     max-width: 100%;
     /* 画面が狭い場合は自動調整 */
@@ -119,22 +162,21 @@
     .deal-complete-section {
     margin-top: 50px;
     /* 少し余白 */
-    text-align: left;
-    /* 左寄せ */
+    text-align: right;
     margin-top: 20px;
     }
 
     /* 取引完了ボタン */
     .deal-complete-btn {
     display: inline-block;
-    /* テキストエリアと同じ幅 */
-    width: 300px;
-    /* ここで横幅を固定 */
+    width: 200px;
+    /* ← ボタンの幅を指定 */
+    margin-left: auto;
+    /* ← 左余白を自動にすることで右寄せ */
+    margin-right: 0;
     padding: 12px;
     background: #e53935;
-    /* 赤背景 */
     color: #fff;
-    /* 白文字 */
     font-weight: bold;
     border-radius: 6px;
     text-align: center;
@@ -185,8 +227,8 @@
     flex-direction: column;
     /* 子要素を縦に並べる */
     gap: 10px;
-    max-width: 300px;
-    /* テキストエリアの幅に合わせるなら */
+    width: 100%;
+    /* 親要素いっぱいに広げる */
 }
 
 .chat-form textarea,
@@ -243,12 +285,141 @@
     background: #ddd;
 }
 
+.partner-avatar {
+    width: 50px;
+    /* 画像の横幅 */
+    height: 50px;
+    /* 画像の高さ */
+    border-radius: 50%;
+    /* 完全な丸にする */
+    object-fit: cover;
+    /* はみ出さないようトリミング */
+    margin-right: 10px;
+    /* 名前との間に余白 */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.deal-partner-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* 左寄せ */
+    gap: 10px;
+    margin-bottom: 15px;
+    /* 商品画像との余白 */
+}
+
+.partner-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.partner-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*横線*/
+.section-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 30px 0;
+    width: 100%;
+}
+/* フォーム全体を横並びにする */
+.chat-form-row {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
+    /* テキストエリアと右のボタンの隙間 */
+}
+
+/* テキストエリアは余った幅いっぱい */
+.chat-form-row textarea {
+    flex: 1;
+    /* これで画面いっぱい広がる */
+    min-height: 60px;
+    resize: vertical;
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* ボタン部分は横並び */
+.chat-form-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 画像アップロードボタンの見た目 */
+.upload-btn {
+    display: inline-block;
+    background: #ffffff;
+    border: 1px solid #d00404;
+    color:#d00404;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 送信ボタンのデザイン */
+.chat-send-btn {
+    background: #fff;
+    /* 背景白 */
+    border: none;
+    /* 枠線なし */
+    padding: 0;
+    /* 余白なし */
+    cursor: pointer;
+    /* カーソルをポインタに */
+    display: inline-flex;
+    /* 中身に合わせる */
+    align-items: center;
+    justify-content: center;
+}
+.star-rating {
+    direction: rtl;
+    /* 右から左に表示 */
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+    /* ラジオボタンは隠す */
+}
+
+.star-rating label {
+    color: #ccc;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked~label {
+    color: #ccc;
+    /* チェック後の星以降はグレー */
+}
+
+.star-rating input[type="radio"]:checked+label,
+.star-rating input[type="radio"]:checked+label~label {
+    color: gold;
+    /* 選択された星と左側の星は金色 */
+}
+
 /* PC用（1400px以上）→ 横並び */
 @media (min-width: 1400px) and (max-width: 1540px) {
     .edit-actions-row {
         display: flex;
-        flex-direction: row;
-        /* 横並び */
+        flex-direction: row; /* 横並び */
         align-items: center;
         gap: 10px;
     }
@@ -258,10 +429,8 @@
 @media (min-width: 768px) and (max-width: 850px) {
     .edit-actions-row {
         display: flex;
-        flex-direction: column;
-        /* 縦並び */
-        align-items: flex-start;
-        /* 左寄せ */
+        flex-direction: column; /* 縦並び */
+        align-items: flex-start; /* 左寄せ */
         gap: 8px;
     }
 

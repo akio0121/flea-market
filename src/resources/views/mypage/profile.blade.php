@@ -24,24 +24,18 @@
         <a href="{{ url('/mypage/profile') }}">
             <button type="button" class="edit-profile-button">プロフィールを編集</button>
         </a>
-    </div>
 
-    <div class="profile-stats">
-        <div class="stat-item">
 
-            <span>取引評価点数</span>
+        <div class="profile-stats">
             <span class="stat-value">
-                @if($averageRating)
-                <p>{{ $averageRating }} 点</p>
-                @else
-                <p>まだ評価がありません</p>
-                @endif
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <=$averageRating)
+                    ★
+                    @else
+                    ☆
+                    @endif
+                    @endfor
             </span>
-        </div>
-
-        <div class="stat-item">
-            <span class="stat-label">新規取引メッセージ件数</span>
-            <span class="stat-value">{{ $unreadCount }} 件
         </div>
     </div>
 </div>
@@ -62,6 +56,10 @@ $currentTab = request()->query('tab');
 
     <a href="{{ url('/mypage?tab=deal') }}" class="tab-link {{ $currentTab === 'deal' ? 'active' : '' }}">
         取引中の商品
+        {{-- 未読があればバッジ表示 --}}
+        @if($unreadCount > 0)
+        <span class="badge-tab">{{ $unreadCount }}</span>
+        @endif
     </a>
     @endauth
 </div>
@@ -91,5 +89,6 @@ $currentTab = request()->query('tab');
         <p class="product-name">{{ $product->name }}</p>
     </div>
     @endforeach
+</div>
 </div>
 @endsection

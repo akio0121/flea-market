@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<div class="deal-container">
 
+<div class="deal-container">
     {{-- 左側サイドバー --}}
     <div class="sidebar">
         <h4>取引中の商品</h4>
@@ -27,11 +27,43 @@
         @endforeach
     </div>
 
-    {{-- 右側メイン --}}
     <div class="deal-main">
-        <h2>{{ $product->name }}</h2>
-        <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}" alt="" style="max-width:300px;">
-        <p>価格: ¥{{ number_format($product->price) }}</p>
+        @if($partnerUser)
+        <div class="deal-partner-header">
+            <img src="{{ asset('images/default_profile.png') }}"
+                alt="{{ $partnerUser->name }}"
+                class="partner-avatar">
+            <div class="partner-info">
+                <span class="partner-name">{{ $partnerUser->name }}さんとの取引画面</span>
+            </div>
+            @php
+            // 購入者判定（orders テーブルから取得）
+            $buyer = \App\Models\Order::where('product_id', $product->id)->first();
+            @endphp
+
+            {{-- 購入者だけ取引完了ボタンを表示 --}}
+            @if(Auth::check() && $buyer && Auth::id() === $buyer->user_id)
+            <div class="deal-complete-section">
+                {{-- モーダルを開くリンク --}}
+                <a href="#modal-rating" class="deal-complete-btn">
+                    取引を完了する
+                </a>
+            </div>
+            @endif
+        </div>
+        @endif
+        <hr class="section-divider">
+
+        {{-- 右側メイン --}}
+        <div class="product-info-container">
+            <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}" alt="" style="max-width:300px;">
+
+            <div class="product-details">
+                <h2>{{ $product->name }}</h2>
+                <p>¥{{ number_format($product->price) }}</p>
+            </div>
+        </div>
+        <hr class="section-divider">
 
         {{-- 取引チャット --}}
         <div class="chat-section">
@@ -44,8 +76,14 @@
             <div class="chat-box">
                 @forelse($messages as $msg)
                 <div class="chat-message {{ $msg->user_id == Auth::id() ? 'my-message' : 'other-message' }}">
-                    <strong>{{ $msg->user->name }}</strong>
-
+                    <div class="chat-message-header">
+                        <img src="{{ $msg->user->profile_image
+                ? asset('storage/' . $msg->user->profile_image)
+                : asset('images/default_profile.png') }}"
+                            alt="{{ $msg->user->name }}"
+                            class="chat-user-avatar">
+                        <strong>{{ $msg->user->name }}</strong>
+                    </div>
                     {{-- ★ 編集対象ならフォーム表示 --}}
                     @if($editId == $msg->id)
                     <form action="{{ route('deal.message.update', $msg->id) }}" method="POST" enctype="multipart/form-data">
@@ -92,33 +130,25 @@
             {{-- チャット送信フォーム --}}
             <form action="{{ route('deal.message.send', ['product' => $product->id]) }}" method="POST" class="chat-form" enctype="multipart/form-data">
                 @csrf
-                <textarea name="name" rows="3" placeholder="メッセージを入力してください...">{{ old('name') }}</textarea>
-                <div class="form__error">
-                    @error('name')
-                    {{ $message }}
-                    @enderror
+                <div class="chat-form-row">
+                    <textarea name="name" placeholder="取引メッセージを記入してください">{{ old('name') }}</textarea>
+                    <div class="form__error">
+                        @error('name')
+                        {{ $message }}
+                        @enderror
+                    </div>
+                    <div class="chat-form-actions">
+                        <label class="upload-btn">
+                            画像を追加
+                            <input type="file" name="image" accept="image/*" style="display:none;">
+                        </label>
+
+                        <button type="submit" class="chat-send-btn">
+                            <img src="/images/send.png" alt="送信" class="send-icon">
+                        </button>
+                    </div>
                 </div>
-
-                {{-- 画像アップロード --}}
-                <input type="file" name="image" accept="image/*">
-
-                <button type="submit" name="action" value="send" class="chat-send-btn">送信</button>
             </form>
-
-            @php
-            // 購入者判定（orders テーブルから取得）
-            $buyer = \App\Models\Order::where('product_id', $product->id)->first();
-            @endphp
-
-            {{-- 購入者だけ取引完了ボタンを表示 --}}
-            @if(Auth::check() && $buyer && Auth::id() === $buyer->user_id)
-            <div class="deal-complete-section">
-                {{-- モーダルを開くリンク --}}
-                <a href="#modal-rating" class="deal-complete-btn">
-                    取引を完了
-                </a>
-            </div>
-            @endif
 
             {{-- ===== 購入者が出品者を評価するモーダル ===== --}}
             <div id="modal-rating" class="modal">
@@ -131,17 +161,23 @@
                         {{-- 評価者IDも渡す --}}
                         <input type="hidden" name="rater_id" value="{{ Auth::id() }}">
 
-                        <label>
-                            評価：
-                            <select name="point" required>
-                                <option value="">選択してください</option>
-                                <option value="5">非常に良い(5点)</option>
-                                <option value="4">良い(4点)</option>
-                                <option value="3">普通(3点)</option>
-                                <option value="2">悪い(2点)</option>
-                                <option value="1">非常に悪い(1点)</option>
-                            </select>
-                        </label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="point" value="5" required>
+                            <label for="star5" title="5点">★</label>
+
+                            <input type="radio" id="star4" name="point" value="4">
+                            <label for="star4" title="4点">★</label>
+
+                            <input type="radio" id="star3" name="point" value="3">
+                            <label for="star3" title="3点">★</label>
+
+                            <input type="radio" id="star2" name="point" value="2">
+                            <label for="star2" title="2点">★</label>
+
+                            <input type="radio" id="star1" name="point" value="1">
+                            <label for="star1" title="1点">★</label>
+                        </div>
+
                         <div style="margin-top:10px;">
                             <button type="submit" style="padding:8px 15px; background:#007bff; color:#fff; border:none; border-radius:5px;">
                                 評価を送信
@@ -165,17 +201,23 @@
                     <form action="{{ route('deal.complete.buyer', $product->id) }}" method="POST">
                         @csrf
 
-                        <label>
-                            評価：
-                            <select name="point" required>
-                                <option value="">選択してください</option>
-                                <option value="5">非常に良い(5点)</option>
-                                <option value="4">良い(4点)</option>
-                                <option value="3">普通(3点)</option>
-                                <option value="2">悪い(2点)</option>
-                                <option value="1">非常に悪い(1点)</option>
-                            </select>
-                        </label>
+                        {{-- 星評価 --}}
+                        <div class="star-rating">
+                            <input type="radio" id="buyer-star5" name="point" value="5" required>
+                            <label for="buyer-star5" title="非常に良い">★</label>
+
+                            <input type="radio" id="buyer-star4" name="point" value="4">
+                            <label for="buyer-star4" title="良い">★</label>
+
+                            <input type="radio" id="buyer-star3" name="point" value="3">
+                            <label for="buyer-star3" title="普通">★</label>
+
+                            <input type="radio" id="buyer-star2" name="point" value="2">
+                            <label for="buyer-star2" title="悪い">★</label>
+
+                            <input type="radio" id="buyer-star1" name="point" value="1">
+                            <label for="buyer-star1" title="非常に悪い">★</label>
+                        </div>
                         <div style="margin-top:10px;">
                             <button type="submit" style="padding:8px 15px; background:#007bff; color:#fff; border:none; border-radius:5px;">
                                 評価を送信
@@ -188,5 +230,6 @@
 
         </div>
     </div>
+</div>
 </div>
 @endsection
