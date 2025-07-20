@@ -4,7 +4,7 @@
 ・環境構築
 
 Dockerビルド
-1,git@github.com:akio0121/attendance.git
+1,git@github.com:akio0121/flea-market.git
 2,DockerDesktopアプリを起動する。
 3,docker-compose up -d --build
 
@@ -17,18 +17,18 @@ Laravel環境構築
 6,php artisan db:seed
 7,php artisan storage:link
 
-・ユーザー名
-1,testA
-  aaa@bbb.com
-  aaaaaaaa
+・ダミーデータ
+1,ユーザー名      testA
+  メールアドレス  aaa@bbb.com
+  パスワード      aaaaaaaa
 
-2,testB
-  bbb@ccc.com
-  bbbbbbbb
+2,ユーザー名      testB
+  メールアドレス   bbb@ccc.com
+  パスワード       bbbbbbbb
 
-3,testC
-  ccc@ddd.com
-  cccccccc
+3,ユーザー名      testC
+  メールアドレス  ccc@ddd.com
+  パスワード      cccccccc
 
 ・使用技術（実行環境）
 PHP 8.3.12
