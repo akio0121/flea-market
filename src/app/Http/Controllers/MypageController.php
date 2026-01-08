@@ -65,8 +65,8 @@ class MypageController extends Controller
 
         //ログインユーザーの評価の平均値を取得
         $averageRating = \App\Models\Assessment::where('user_id', $user->id)->avg('point');
-        $averageRating = $averageRating ? round($averageRating) : null;
-
+        $averageRating = $averageRating !== null ? round($averageRating) : 0;
+        
         if ($tab === 'buy') {
             // 購入した商品
             $orders = $user->orders()->with(['product' => function ($query) use ($keyword) {

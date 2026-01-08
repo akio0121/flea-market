@@ -1,11 +1,4 @@
-@extends('layouts.login_app')
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
-@endsection
-
 @section('content')
-
 <div class="profile-container">
     @php
     $imagePath = $user->image && file_exists(storage_path('app/public/' . $user->image))
@@ -20,22 +13,20 @@
 
     <div class="profile-info">
         <h2 class="profile-name">{{ $user->name }}</h2>
-
         <a href="{{ url('/mypage/profile') }}">
             <button type="button" class="edit-profile-button">プロフィールを編集</button>
         </a>
 
 
         <div class="profile-stats">
+            @if (!is_null($averageRating) && $averageRating > 0)
+            {{-- 評価がある場合だけ星を描画 --}}
             <span class="stat-value">
                 @for ($i = 1; $i <= 5; $i++)
-                    @if ($i <=$averageRating)
-                    ★
-                    @else
-                    ☆
-                    @endif
+                    {{ $i <= round($averageRating) ? '★' : '☆' }}
                     @endfor
-            </span>
+                    </span>
+                    @endif
         </div>
     </div>
 </div>
